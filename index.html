@@ -1,1722 +1,207 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ارائه اینترنت اشیا | احسان نامی</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BIOS؛ مغز راه‌انداز کامپیوتر</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-}
-
-body{
-    font-family:Vazirmatn,sans-serif;
-    background:#02040a;
-    color:#eefaff;
-    perspective:1400px;
-}
-
-/* BACKGROUND */
-body:before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background:
-    radial-gradient(circle at 50% 35%,rgba(0,229,255,.14),transparent 27%),
-    radial-gradient(circle at 10% 90%,rgba(62,70,255,.12),transparent 28%),
-    radial-gradient(circle at 90% 10%,rgba(0,255,180,.09),transparent 30%);
-}
-
-body:after{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background:linear-gradient(
-        rgba(0,229,255,.025) 1px,
-        transparent 1px
-    );
-    background-size:100% 5px;
-    opacity:.25;
-}
-
-/* PARTICLES */
-#particles{
-    position:fixed;
-    inset:0;
-    z-index:0;
-}
-
-/* GRID */
-.grid{
-    position:fixed;
-    inset:-40%;
-    opacity:.14;
-    pointer-events:none;
-    background-image:
-    linear-gradient(rgba(0,229,255,.13) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,229,255,.13) 1px,transparent 1px);
-    background-size:55px 55px;
-    transform:perspective(500px) rotateX(65deg) translateY(25%);
-    animation:gridMove 18s linear infinite;
-}
-
-@keyframes gridMove{
-    to{
-        transform:perspective(500px) rotateX(65deg) translateY(8%);
-    }
-}
-
-.app{
-    position:relative;
-    z-index:2;
-    width:100%;
-    height:100%;
-}
-
-/* HEADER */
-header{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    height:76px;
-    padding:0 35px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    background:rgba(2,5,11,.65);
-    backdrop-filter:blur(22px);
-    z-index:30;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-weight:800;
-}
-
-.logo{
-    width:42px;
-    height:42px;
-    border-radius:13px;
-    display:grid;
-    place-items:center;
-    color:#00e5ff;
-    border:1px solid rgba(0,229,255,.55);
-    box-shadow:
-    0 0 25px rgba(0,229,255,.18),
-    inset 0 0 15px rgba(0,229,255,.08);
-    font-size:21px;
-}
-
-.brand span{
-    color:#00e5ff;
-}
-
-.progress{
-    display:flex;
-    align-items:center;
-    gap:7px;
-}
-
-.dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#27333d;
-    transition:.35s;
-    cursor:pointer;
-}
-
-.dot.active{
-    width:30px;
-    border-radius:10px;
-    background:#00e5ff;
-    box-shadow:0 0 18px #00e5ff;
-}
-
-/* SLIDES */
-.slide{
-    position:absolute;
-    inset:76px 0 0;
-    display:none;
-    overflow:auto;
-    padding:40px 7vw 100px;
-    scrollbar-width:none;
-}
-
-.slide::-webkit-scrollbar{
-    display:none;
-}
-
-.slide.active{
-    display:block;
-    animation:slideIn .65s cubic-bezier(.2,.8,.2,1);
-}
-
-@keyframes slideIn{
-    from{
-        opacity:0;
-        transform:translateZ(-150px) rotateX(5deg) scale(.97);
-    }
-    to{
-        opacity:1;
-        transform:none;
-    }
-}
-
-.center{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-}
-
-.hero{
-    height:calc(100vh - 76px);
-    padding-bottom:50px;
-}
-
-/* TEXT */
-.eyebrow{
-    color:#00e5ff;
-    font-size:12px;
-    letter-spacing:4px;
-    margin-bottom:18px;
-    text-transform:uppercase;
-}
-
-.title{
-    font-size:clamp(32px,5vw,64px);
-    line-height:1.2;
-    font-weight:900;
-    margin-bottom:15px;
-    text-shadow:0 0 35px rgba(0,229,255,.12);
-}
-
-.title span,
-h1 span{
-    color:#00e5ff;
-}
-
-.sub{
-    max-width:850px;
-    color:#94a8b8;
-    line-height:2;
-    margin-bottom:30px;
-    font-size:15px;
-}
-
-h1{
-    font-size:clamp(45px,8vw,105px);
-    line-height:1;
-    font-weight:900;
-    letter-spacing:-3px;
-    text-shadow:0 0 50px rgba(0,229,255,.22);
-}
-
-/* BUTTON */
-.btn{
-    margin-top:28px;
-    border:1px solid #00e5ff;
-    background:rgba(0,229,255,.07);
-    color:white;
-    padding:14px 30px;
-    border-radius:15px;
-    font:inherit;
-    cursor:pointer;
-    transition:.3s;
-    box-shadow:0 0 30px rgba(0,229,255,.12);
-}
-
-.btn:hover{
-    background:#00e5ff;
-    color:#001018;
-    transform:translateY(-4px);
-    box-shadow:0 12px 40px rgba(0,229,255,.3);
-}
-
-/* EARTH */
-.earth-wrap{
-    position:relative;
-    width:280px;
-    height:280px;
-    margin-bottom:30px;
-}
-
-.earth{
-    position:absolute;
-    inset:20px;
-    border-radius:50%;
-    background:
-    radial-gradient(circle at 30% 30%,#d9ffff 0 1%,transparent 2%),
-    radial-gradient(circle at 60% 25%,#00e5ff 0 3%,transparent 4%),
-    radial-gradient(circle at 25% 55%,#008cff 0 5%,transparent 6%),
-    radial-gradient(circle at 65% 65%,#244cff 0 6%,transparent 7%),
-    radial-gradient(circle at 40% 70%,#00ffc8 0 8%,transparent 9%),
-    radial-gradient(circle,#082c46 15%,#03101c 68%);
-    box-shadow:
-    0 0 45px #00bfff,
-    0 0 100px rgba(0,229,255,.18),
-    inset -35px -20px 55px #000;
-    animation:float 5s ease-in-out infinite,
-              spin 18s linear infinite;
-}
-
-.earth:before{
-    content:"";
-    position:absolute;
-    inset:-17px;
-    border-radius:50%;
-    border:1px solid rgba(0,229,255,.4);
-    box-shadow:0 0 30px rgba(0,229,255,.15);
-}
-
-.earth:after{
-    content:"";
-    position:absolute;
-    inset:-32px;
-    border-radius:50%;
-    border:1px dashed rgba(0,229,255,.18);
-    transform:rotateX(65deg);
-}
-
-@keyframes spin{
-    to{transform:rotate(360deg)}
-}
-
-@keyframes float{
-    50%{transform:translateY(-12px)}
-}
-
-/* INTRO BOX */
-.intro-box{
-    max-width:900px;
-    margin:25px auto;
-    padding:35px;
-    border:1px solid rgba(0,229,255,.2);
-    border-radius:28px;
-    background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.075),
-        rgba(255,255,255,.025)
-    );
-    backdrop-filter:blur(18px);
-    box-shadow:
-    0 25px 80px rgba(0,0,0,.35),
-    inset 0 0 40px rgba(0,229,255,.025);
-}
-
-.intro-box p{
-    color:#a9bac7;
-    line-height:2.2;
-    font-size:15px;
-}
-
-.student-info{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-    margin-top:25px;
-}
-
-.info-pill{
-    padding:12px 22px;
-    border-radius:14px;
-    border:1px solid rgba(0,229,255,.18);
-    background:rgba(0,229,255,.045);
-    color:#b8c9d5;
-}
-
-.info-pill strong{
-    color:#00e5ff;
-}
-
-/* CARDS */
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:18px;
-    max-width:1150px;
-    margin:auto;
-}
-
-.card{
-    min-height:185px;
-    padding:26px;
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:23px;
-    background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.075),
-        rgba(255,255,255,.025)
-    );
-    backdrop-filter:blur(15px);
-    transition:.35s;
-    transform-style:preserve-3d;
-    position:relative;
-    overflow:hidden;
-}
-
-.card:before{
-    content:"";
-    position:absolute;
-    width:100px;
-    height:100px;
-    background:rgba(0,229,255,.08);
-    filter:blur(35px);
-    top:-40px;
-    right:-40px;
-}
-
-.card:hover{
-    transform:translateY(-9px) rotateX(3deg) rotateY(-3deg);
-    border-color:rgba(0,229,255,.5);
-    box-shadow:
-    0 25px 60px rgba(0,0,0,.4),
-    0 0 30px rgba(0,229,255,.08);
-}
-
-.icon{
-    font-size:38px;
-    margin-bottom:15px;
-}
-
-.card h3{
-    font-size:19px;
-    margin-bottom:10px;
-}
-
-.card p{
-    font-size:13px;
-    color:#9aabb8;
-    line-height:1.9;
-}
-
-/* FLOW */
-.flow{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-    flex-wrap:wrap;
-    margin:40px auto;
-    max-width:1100px;
-}
-
-.node{
-    width:155px;
-    height:135px;
-    border-radius:22px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    border:1px solid rgba(0,229,255,.25);
-    background:rgba(0,229,255,.045);
-    transition:.3s;
-}
-
-.node:hover{
-    transform:translateY(-8px) scale(1.04);
-    border-color:#00e5ff;
-    box-shadow:0 0 35px rgba(0,229,255,.2);
-}
-
-.node b{
-    font-size:32px;
-    margin-bottom:8px;
-}
-
-.node small{
-    color:#9fb0bf;
-}
-
-.arrow{
-    font-size:25px;
-    color:#00e5ff;
-    animation:pulse 1.2s infinite;
-}
-
-@keyframes pulse{
-    50%{
-        transform:translateX(-5px);
-        opacity:.5;
-    }
-}
-
-/* ARCHITECTURE */
-.architecture{
-    max-width:1100px;
-    margin:30px auto;
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:10px;
-}
-
-.arch{
-    padding:25px 12px;
-    text-align:center;
-    border-radius:18px;
-    border:1px solid rgba(0,229,255,.15);
-    background:rgba(255,255,255,.035);
-}
-
-.arch b{
-    display:block;
-    font-size:28px;
-    margin-bottom:10px;
-}
-
-.arch span{
-    font-size:12px;
-    color:#9eafbc;
-}
-
-/* QUOTE */
-.quote{
-    max-width:900px;
-    margin:35px auto;
-    padding:32px;
-    border-radius:25px;
-    border:1px solid rgba(0,229,255,.23);
-    background:rgba(0,229,255,.035);
-    text-align:center;
-    font-size:20px;
-    line-height:2;
-    color:#d7f8ff;
-    box-shadow:inset 0 0 40px rgba(0,229,255,.025);
-}
-
-/* SMART WORLD */
-.iot-room{
-    position:relative;
-    max-width:1100px;
-    height:430px;
-    margin:15px auto;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:30px;
-    background:
-    radial-gradient(circle at center,rgba(0,229,255,.06),transparent 45%),
-    linear-gradient(145deg,rgba(13,29,45,.9),rgba(3,9,16,.95));
-    overflow:hidden;
-    box-shadow:0 30px 80px rgba(0,0,0,.45);
-}
-
-.floor{
-    position:absolute;
-    left:-10%;
-    right:-10%;
-    bottom:-80px;
-    height:190px;
-    background:linear-gradient(
-        transparent,
-        rgba(0,229,255,.09)
-    );
-    transform:perspective(500px) rotateX(55deg);
-}
-
-.room-item{
-    position:absolute;
-    width:110px;
-    height:110px;
-    border-radius:22px;
-    display:grid;
-    place-items:center;
-    text-align:center;
-    font-size:38px;
-    background:rgba(5,15,25,.85);
-    border:1px solid rgba(0,229,255,.35);
-    box-shadow:0 0 25px rgba(0,229,255,.08);
-    cursor:pointer;
-    transition:.3s;
-}
-
-.room-item span{
-    display:block;
-    font-size:12px;
-    color:#9eb1c1;
-}
-
-.room-item:hover{
-    transform:scale(1.12) translateZ(40px);
-    border-color:#00e5ff;
-    box-shadow:0 0 40px rgba(0,229,255,.25);
-}
-
-.i1{top:45px;right:13%}
-.i2{top:165px;right:42%}
-.i3{top:55px;left:13%}
-.i4{bottom:35px;left:37%}
-.i5{bottom:35px;right:12%}
-
-/* STATS */
-.stat-row{
-    display:flex;
-    justify-content:center;
-    gap:18px;
-    flex-wrap:wrap;
-    margin:30px 0;
-}
-
-.stat{
-    min-width:190px;
-    padding:22px;
-    text-align:center;
-    border-radius:18px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.stat strong{
-    display:block;
-    font-size:28px;
-    color:#00e5ff;
-    margin-bottom:6px;
-}
-
-.stat span{
-    color:#9aabb9;
-    font-size:12px;
-}
-
-/* FUTURE */
-.future{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-    gap:16px;
-    max-width:1050px;
-    margin:25px auto;
-}
-
-.future .card{
-    text-align:center;
-    min-height:205px;
-}
-
-/* FOOTER */
-footer{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    height:65px;
-    padding:0 30px;
-    z-index:35;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:linear-gradient(
-        transparent,
-        rgba(2,5,11,.95)
-    );
-    pointer-events:none;
-}
-
-.nav{
-    display:flex;
-    gap:9px;
-    pointer-events:auto;
-}
-
-.nav button{
-    border:1px solid rgba(255,255,255,.12);
-    background:rgba(255,255,255,.06);
-    color:white;
-    width:44px;
-    height:44px;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:18px;
-    transition:.25s;
-}
-
-.nav button:hover{
-    border-color:#00e5ff;
-    color:#00e5ff;
-    box-shadow:0 0 18px rgba(0,229,255,.15);
-}
-
-.counter{
-    font-size:12px;
-    color:#738595;
-}
-
-/* INFO MODAL */
-#info{
-    position:fixed;
-    inset:auto 50% 50%;
-    transform:translate(50%,50%) scale(.8);
-    width:min(440px,88vw);
-    padding:30px;
-    border-radius:23px;
-    background:rgba(3,10,18,.97);
-    border:1px solid #00e5ff;
-    box-shadow:0 0 80px rgba(0,229,255,.2);
-    z-index:100;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
-}
-
-#info.show{
-    opacity:1;
-    transform:translate(50%,50%) scale(1);
-    pointer-events:auto;
-}
-
-#info h3{
-    color:#00e5ff;
-    margin-bottom:13px;
-}
-
-#info p{
-    color:#b4c2ce;
-    line-height:2;
-    font-size:14px;
-}
-
-.close{
-    position:absolute;
-    left:15px;
-    top:12px;
-    background:none;
-    border:0;
-    color:#aaa;
-    font-size:20px;
-    cursor:pointer;
-}
-
-/* MOBILE */
-@media(max-width:750px){
-
-    header{
-        padding:0 15px;
-    }
-
-    .brand{
-        font-size:13px;
-    }
-
-    .progress{
-        display:none;
-    }
-
-    .slide{
-        padding:25px 18px 90px;
-    }
-
-    .hero{
-        padding-bottom:20px;
-    }
-
-    .earth-wrap{
-        width:220px;
-        height:220px;
-    }
-
-    .earth{
-        inset:15px;
-    }
-
-    h1{
-        font-size:43px;
-    }
-
-    .flow{
-        gap:7px;
-    }
-
-    .node{
-        width:125px;
-        height:110px;
-    }
-
-    .arrow{
-        display:none;
-    }
-
-    .architecture{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .iot-room{
-        height:470px;
-    }
-
-    .room-item{
-        width:90px;
-        height:90px;
-        font-size:30px;
-    }
-
-    .i1{right:5%}
-    .i2{right:36%;top:185px}
-    .i3{left:5%}
-    .i4{left:8%;bottom:30px}
-    .i5{right:8%;bottom:30px}
-
-    footer{
-        padding:0 15px;
-    }
-}
+:root{--bg:#070b14;--card:rgba(14,20,36,.8);--tx:#e8eefc;--mut:#93a1c4;--ac:#38e1c6;--ac2:#7c8cff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#e9eefb;--card:rgba(255,255,255,.88);--tx:#0e1526;--mut:#4d5c7d;--ac:#079a84;--ac2:#4453d8}}
+:root[data-theme="dark"]{--bg:#070b14}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{height:100%;margin:0;overflow:hidden;color:var(--tx);font-family:Vazirmatn,Tahoma,sans-serif;background:radial-gradient(ellipse at 30% 20%,color-mix(in srgb,var(--ac2) 22%,transparent),transparent 55%),radial-gradient(ellipse at 80% 90%,color-mix(in srgb,var(--ac) 16%,transparent),transparent 50%),var(--bg)}
+#stage{position:absolute;inset:0;perspective:1500px;--sx:-15vw;--sy:0vh}
+#cam{position:absolute;left:50%;top:50%;transform:translate(var(--sx),var(--sy)) rotateY(var(--ry,0deg)) rotateX(var(--rx2,0deg));transform-style:preserve-3d;transition:transform 1.2s ease}
+#float{transform-style:preserve-3d;animation:fl 6s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px)}}
+#board{position:absolute;left:-500px;top:-350px;width:1000px;height:700px;border-radius:16px;transform-style:preserve-3d;transition:transform 1.8s cubic-bezier(.65,0,.2,1);
+background:linear-gradient(rgba(56,225,198,.07) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(56,225,198,.07) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(135deg,#0f4a45,#0b2f45);
+box-shadow:0 2px 0 #08303a,0 4px 0 #072a33,0 6px 0 #06242c,0 8px 0 #051e25,0 40px 60px rgba(0,0,0,.55)}
+svg.tr{position:absolute;inset:0;width:100%;height:100%}
+.tr path{fill:none;stroke:var(--ac);stroke-width:3;stroke-dasharray:8 14;opacity:.55;animation:fw 2s linear infinite}
+@keyframes fw{to{stroke-dashoffset:-44}}
+.p{position:absolute;border-radius:6px;transform:translateZ(var(--z));--e:#0a111f;background:#1a2438;box-shadow:1px 1px 0 var(--e),2px 2px 0 var(--e),3px 3px 0 var(--e),4px 4px 0 var(--e),6px 8px 10px rgba(0,0,0,.55);transition:opacity .8s,box-shadow .8s;display:flex;align-items:center;justify-content:center;font:700 13px monospace;color:#cfd8ea}
+.p::before{content:attr(data-t);position:absolute;top:-30px;left:50%;transform:translateX(-50%);white-space:nowrap;font:700 17px Vazirmatn,sans-serif;background:var(--ac);color:#04111a;padding:2px 12px;border-radius:99px;opacity:0;transition:opacity .6s .8s}
+.focus .p{opacity:.35}
+.focus .p.on{opacity:1;animation:pu 2s ease-in-out infinite}
+.p.on::before{opacity:1}
+@keyframes pu{50%{box-shadow:1px 1px 0 var(--e),2px 2px 0 var(--e),3px 3px 0 var(--e),4px 4px 0 var(--e),0 0 40px 8px var(--ac)}}
+.io{background:repeating-linear-gradient(90deg,#8b97ad 0 14px,#6d7890 14px 16px)}
+.cpu{background:linear-gradient(#2a3552,#2a3552) center/60% 60% no-repeat,repeating-linear-gradient(0deg,#c9a24a 0 3px,#3a2f12 3px 6px);border:6px solid #2b3550}
+.cpu{font-size:22px}
+.ram{background:#0d1526;flex-direction:row;gap:10px;padding:8px}
+.ram i{flex:1;height:100%;background:linear-gradient(#20304f,#0b1120);border-radius:3px;border:1px solid #38e1c644}
+.chip{background:#0a0d14;border:2px solid #c9a24a;font-size:20px;color:#fff;letter-spacing:2px}
+.chip::after{content:"";position:absolute;left:6px;top:6px;width:7px;height:7px;border-radius:50%;background:#c9a24a}
+.bat{border-radius:50%;background:radial-gradient(circle,#dfe6f2,#8894aa);color:#233;font-size:14px}
+.pch{background:repeating-linear-gradient(90deg,#3b4a6b 0 8px,#222c45 8px 12px);color:#fff}
+.pcie{background:#0b0f19;border:2px solid #232d47}
+.sata{background:#0b0f19;border:2px solid #38e1c655;border-radius:4px}
+.pwr{background:#e8e8ee;color:#333}
+#card{position:fixed;top:50%;right:4vw;width:min(440px,36vw);transform:translateY(-50%);background:var(--card);backdrop-filter:blur(14px);border:1px solid color-mix(in srgb,var(--ac) 30%,transparent);border-radius:22px;padding:26px 28px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+#card .k{color:var(--ac);font:700 13px monospace;letter-spacing:2px}
+#card h2{margin:6px 0 14px;font-size:clamp(24px,3.2vw,38px);font-weight:900;line-height:1.35}
+#card h2 span{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+#card ul{list-style:none;margin:0;padding:0}
+#card li{position:relative;padding:0 22px 0 0;margin:0 0 10px;color:var(--mut);line-height:1.9;font-size:clamp(14px,1.25vw,17px);opacity:0;transform:translateY(14px);animation:in .7s forwards;animation-delay:calc(.9s + var(--d)*.28s)}
+#card li::before{content:"";position:absolute;right:0;top:.85em;width:9px;height:9px;border-radius:3px;background:var(--ac);transform:rotate(45deg)}
+#card li b{color:var(--tx)}
+#card .k,#card h2{animation:in .8s both}
+@keyframes in{to{opacity:1;transform:none}}
+#nav{display:flex;align-items:center;gap:10px;margin-top:18px}
+#nav button{width:42px;height:42px;border-radius:50%;border:1px solid var(--ac);background:transparent;color:var(--ac);font-size:20px;cursor:pointer;transition:.25s}
+#nav button:hover{background:var(--ac);color:#04111a;transform:scale(1.1)}
+#dots{flex:1;display:flex;gap:6px;justify-content:center}
+#dots i{width:8px;height:8px;border-radius:99px;background:var(--mut);opacity:.4;transition:.4s;cursor:pointer}
+#dots i.a{width:26px;background:var(--ac);opacity:1}
+@media (max-width:800px){#stage{--sx:0vw;--sy:-17vh}#card{top:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px));right:12px;left:12px;width:auto;transform:none;padding:16px 18px;max-height:46vh;overflow:auto}#card li{margin-bottom:5px}}
+#nb{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:10px;z-index:9;border:1px solid var(--ac);background:var(--card);color:var(--ac);border-radius:99px;padding:6px 14px;font:700 13px Vazirmatn,Tahoma,sans-serif;cursor:pointer;backdrop-filter:blur(10px)}
+#np{display:none;position:fixed;left:2vw;bottom:2vh;width:min(560px,50vw);max-height:38vh;overflow:auto;background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--ac);border-radius:18px;padding:16px 20px;z-index:8;line-height:2.1;font-size:clamp(15px,1.5vw,19px)}
+.sn #np{display:block}
+@media (max-width:800px){#np{left:12px;right:12px;width:auto;top:calc(56px + env(safe-area-inset-top,0px));bottom:auto;max-height:34vh}}
+#bg{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#pg{position:fixed;top:0;right:0;height:3px;width:0;background:linear-gradient(270deg,var(--ac),var(--ac2));transition:width .9s;z-index:9}
+.p{cursor:pointer}.p:hover{filter:brightness(1.4)}
+.term{direction:ltr;text-align:left;margin:12px 0 0;padding:12px 14px;background:#02060d;color:#4ade80;border-radius:12px;font:13px/1.7 'Courier New',monospace;border:1px solid #1f3b2e}
+.term span{display:block;opacity:0;animation:in .4s forwards;animation-delay:calc(.9s + var(--d)*.45s)}
+#ps{position:fixed;inset:0;z-index:20;background:#000;color:#9cf0b8;font:clamp(13px,2vw,19px)/1.8 'Courier New',monospace;padding:8vh 6vw;direction:ltr;text-align:left;white-space:pre-wrap;transition:opacity 1s;cursor:pointer}
+#ps.h{opacity:0;pointer-events:none}
+#pw{height:100%;display:grid;place-content:center;text-align:center;gap:18px}
+#pw b{font-size:clamp(60px,12vw,120px);color:#4ade80;text-shadow:0 0 30px #4ade80;animation:pl 1.6s ease-in-out infinite;font-weight:400}
+#pw span{font:18px Vazirmatn,Tahoma,sans-serif;direction:rtl;color:#9cf0b8}
+@keyframes pl{50%{opacity:.4}}
+@keyframes rp{0%{outline:2px solid var(--ac);outline-offset:0}100%{outline:2px solid transparent;outline-offset:26px}}
+.focus .p.on{animation:pu 2s ease-in-out infinite,rp 2s ease-out infinite}
+.fact{margin-top:12px;padding:10px 14px;border-radius:12px;background:color-mix(in srgb,var(--ac2) 20%,transparent);font-size:clamp(13px,1.1vw,15px);line-height:1.9;opacity:0;animation:in .7s 2.4s forwards}
+#mb{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:150px;z-index:9;border:1px solid var(--ac);background:var(--card);color:var(--ac);border-radius:99px;padding:6px 12px;font-size:14px;cursor:pointer}
+#lz{position:fixed;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--ac) 70%,transparent),transparent 70%);pointer-events:none;z-index:15;transform:translate(-50%,-50%);opacity:0;transition:opacity .4s}
+@media (min-width:801px){#card{max-height:88vh;overflow:auto}}
+
+.cs{position:absolute;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(56,225,198,.05) 38px 40px),linear-gradient(135deg,#1a2338,#0b1220);border:1px solid #2a3a5a;transition:opacity 1s}
+#bk{left:-60px;top:-60px;width:1120px;height:980px;transform:translateZ(-8px);border-radius:10px}
+#fl{left:-60px;top:920px;width:1120px;height:440px;transform-origin:top;transform:rotateX(90deg)}
+#ce{left:-60px;top:-60px;width:1120px;height:440px;transform-origin:top;transform:rotateX(90deg)}
+#lw{left:-60px;top:-60px;width:440px;height:980px;transform-origin:left;transform:rotateY(-90deg)}
+#rw{left:620px;top:-60px;width:440px;height:980px;transform-origin:right;transform:rotateY(90deg)}
+#dr{position:absolute;left:-60px;top:-60px;width:1120px;height:980px;transform-origin:left;transform:translateZ(440px);border:4px solid #2a3a5a;border-radius:10px;background:linear-gradient(115deg,rgba(255,255,255,.14),transparent 38%),rgba(56,225,198,.06);box-shadow:inset 0 0 80px rgba(56,225,198,.18);transition:transform 1.8s cubic-bezier(.65,0,.2,1),opacity .9s .9s}
+#dr::after{content:"BIOS·PC";position:absolute;bottom:26px;left:34px;font:700 34px monospace;color:rgba(56,225,198,.55);letter-spacing:8px}
+.op #dr{transform:translateZ(440px) translateX(-1300px) rotateY(-25deg);opacity:0;visibility:hidden;transition:transform 1.8s cubic-bezier(.65,0,.2,1),opacity .9s .9s,visibility 0s 1.8s}
+.op.zm #ce,.op.zm #lw,.op.zm #rw{opacity:0}
+.gf{display:block;width:56px;height:56px;margin:0 14px;border-radius:50%;background:repeating-conic-gradient(#3b4a6b 0 18deg,#141c30 18deg 36deg);border:3px solid #2b3550;animation:sp .9s linear infinite}
+.sp{position:absolute;inset:8px;border-radius:50%;background:repeating-conic-gradient(#3b4a6b 0 18deg,#141c30 18deg 36deg);animation:sp 1.1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.fan{border-radius:50%;background:#10182a;border:6px solid #2b3550}
+.focus-cpu .fan{opacity:0}
+.gpu{background:linear-gradient(#1b2436,#0d1220);border:2px solid #38e1c655}
+.ssd{background:#1e3a5f;border:1px solid #38e1c6;font-size:10px}
+.psu{background:linear-gradient(#222b3f,#141b2b);border:2px solid #3a4a6b;font-size:22px;letter-spacing:4px;justify-content:space-around}
+#ly{position:fixed;left:0;top:0;bottom:0;width:62vw;perspective:1100px;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .8s;z-index:2}
+#ly.show{opacity:1}
+.lyi{position:relative;width:460px;height:100px;transform-style:preserve-3d;transform:rotateX(55deg) rotateZ(-8deg) translateY(90px)}
+.sl{position:absolute;inset:0;border-radius:14px;display:grid;place-content:center;font:700 22px Vazirmatn,Tahoma,sans-serif;color:var(--tx);background:color-mix(in srgb,var(--c) 28%,rgba(14,20,36,.9));border:2px solid var(--c);transform:translateZ(var(--z));transition:.4s}
+.sl.on{background:var(--c);color:#04111a;transform:translateZ(calc(var(--z) + 34px));box-shadow:0 0 40px var(--c)}
+#lyl{position:absolute;bottom:8vh;left:0;right:0;text-align:center;color:var(--ac);font:700 18px Vazirmatn,Tahoma,sans-serif}
+@media (max-width:800px){#ly{width:100vw;bottom:auto;height:50vh;top:calc(50px + env(safe-area-inset-top,0px))}.lyi{transform:rotateX(55deg) rotateZ(-8deg) scale(.7) translateY(40px)}#lyl{bottom:2vh}}
 </style>
 </head>
-
 <body>
-
-<div id="particles"></div>
-<div class="grid"></div>
-
-<div class="app">
-
-<header>
-    <div class="brand">
-        <div class="logo">⌁</div>
-        <div>
-            ارائه <span>اینترنت اشیا</span>
-        </div>
-    </div>
-
-    <div class="progress" id="progress"></div>
-</header>
-
-
-<!-- 01 COVER -->
-<section class="slide active" id="s0">
-
-<div class="hero center">
-
-    <div class="earth-wrap">
-        <div class="earth"></div>
-    </div>
-
-    <div class="eyebrow">
-        UNIVERSITY PRESENTATION • 2026
-    </div>
-
-    <h1>
-        INTERNET
-        <span>OF THINGS</span>
-    </h1>
-
-    <p class="sub">
-        ارائه‌ای تعاملی درباره اینترنت اشیا؛
-        جایی که اشیا، داده و فناوری به یکدیگر متصل می‌شوند
-        تا دنیای اطراف ما هوشمندتر شود.
-    </p>
-
-    <div class="student-info">
-
-        <div class="info-pill">
-            ارائه‌دهنده:
-            <strong>احسان نامی</strong>
-        </div>
-
-        <div class="info-pill">
-            استاد:
-            <strong>غفوری</strong>
-        </div>
-
-    </div>
-
-    <button class="btn" onclick="go(1)">
-        ورود به ارائه ←
-    </button>
-
-</div>
-
-</section>
-
-
-<!-- 02 INTRO -->
-<section class="slide" id="s1">
-
-<div class="center">
-
-    <div class="eyebrow">
-        01 / INTRODUCTION
-    </div>
-
-    <h2 class="title">
-        مقدمه‌ای بر <span>اینترنت اشیا</span>
-    </h2>
-
-    <div class="intro-box">
-
-        <p>
-            اینترنت اشیا یا IoT مفهومی است که در آن اشیای فیزیکی
-            مختلف مانند لوازم خانگی، خودروها، تجهیزات صنعتی،
-            ابزارهای پزشکی و حتی زیرساخت‌های شهری می‌توانند
-            به شبکه متصل شوند، اطلاعات جمع‌آوری کنند و
-            داده‌های خود را با سیستم‌های دیگر به اشتراک بگذارند.
-        </p>
-
-        <br>
-
-        <p>
-            هدف اینترنت اشیا تنها اتصال دستگاه‌ها به اینترنت نیست؛
-            بلکه ایجاد ارتباط میان دنیای فیزیکی و دیجیتال است.
-            در این ساختار، حسگرها اطلاعات محیط را دریافت می‌کنند،
-            شبکه داده‌ها را منتقل می‌کند و سیستم‌های پردازشی
-            از این اطلاعات برای تحلیل و تصمیم‌گیری استفاده می‌کنند.
-        </p>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- 03 WHAT IS IOT -->
-<section class="slide" id="s2">
-
-<div class="center">
-
-    <div class="eyebrow">
-        02 / CONCEPT
-    </div>
-
-    <h2 class="title">
-        اینترنت اشیا <span>چیست؟</span>
-    </h2>
-
-    <p class="sub">
-        IoT مخفف Internet of Things است و به شبکه‌ای از
-        اشیای فیزیکی دارای حسگر، نرم‌افزار و قابلیت ارتباطی گفته می‌شود.
-    </p>
-
-</div>
-
-<div class="cards">
-
-    <div class="card">
-        <div class="icon">📡</div>
-        <h3>اتصال</h3>
-        <p>
-            دستگاه‌ها از طریق Wi-Fi، Bluetooth،
-            شبکه موبایل و فناوری‌های دیگر به شبکه متصل می‌شوند.
-        </p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🌡️</div>
-        <h3>حسگر</h3>
-        <p>
-            حسگرها اطلاعاتی مانند دما، نور، حرکت،
-            فشار و موقعیت را اندازه‌گیری می‌کنند.
-        </p>
-    </div>
-
-    <div class="card">
-        <div class="icon">☁️</div>
-        <h3>داده</h3>
-        <p>
-            اطلاعات جمع‌آوری‌شده می‌تواند در سرور
-            یا فضای ابری ذخیره و پردازش شود.
-        </p>
-    </div>
-
-    <div class="card">
-        <div class="icon">⚙️</div>
-        <h3>اقدام</h3>
-        <p>
-            سیستم می‌تواند بر اساس داده‌های دریافت‌شده
-            یک عمل مشخص و خودکار انجام دهد.
-        </p>
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- 04 ARCHITECTURE -->
-<section class="slide" id="s3">
-
-<div class="center">
-
-    <div class="eyebrow">
-        03 / ARCHITECTURE
-    </div>
-
-    <h2 class="title">
-        معماری اینترنت اشیا
-    </h2>
-
-    <p class="sub">
-        از دریافت اطلاعات توسط حسگر تا تصمیم‌گیری و اجرای یک عمل
-    </p>
-
-</div>
-
-<div class="architecture">
-
-    <div class="arch">
-        <b>🌡️</b>
-        <span>حسگرها</span>
-    </div>
-
-    <div class="arch">
-        <b>📶</b>
-        <span>ارتباط و شبکه</span>
-    </div>
-
-    <div class="arch">
-        <b>☁️</b>
-        <span>پردازش</span>
-    </div>
-
-    <div class="arch">
-        <b>🧠</b>
-        <span>تحلیل داده</span>
-    </div>
-
-    <div class="arch">
-        <b>⚡</b>
-        <span>اقدام</span>
-    </div>
-
-</div>
-
-<div class="quote">
-    حسگر → شبکه → پردازش → تحلیل → تصمیم → اقدام
-</div>
-
-</section>
-
-
-<!-- 05 HOW -->
-<section class="slide" id="s4">
-
-<div class="center">
-
-    <div class="eyebrow">
-        04 / HOW IT WORKS
-    </div>
-
-    <h2 class="title">
-        اینترنت اشیا چگونه <span>کار می‌کند؟</span>
-    </h2>
-
-    <p class="sub">
-        یک نمونه ساده از عملکرد یک سیستم IoT
-    </p>
-
-</div>
-
-<div class="flow">
-
-    <div class="node">
-        <b>🌡️</b>
-        <small>Sensor<br>حسگر</small>
-    </div>
-
-    <div class="arrow">←</div>
-
-    <div class="node">
-        <b>📶</b>
-        <small>Network<br>شبکه</small>
-    </div>
-
-    <div class="arrow">←</div>
-
-    <div class="node">
-        <b>☁️</b>
-        <small>Cloud<br>پردازش</small>
-    </div>
-
-    <div class="arrow">←</div>
-
-    <div class="node">
-        <b>🧠</b>
-        <small>Analysis<br>تحلیل</small>
-    </div>
-
-    <div class="arrow">←</div>
-
-    <div class="node">
-        <b>⚡</b>
-        <small>Action<br>اقدام</small>
-    </div>
-
-</div>
-
-<div class="quote">
-    مثال:
-    سنسور دمای خانه → ارسال داده →
-    تحلیل دما → تشخیص گرمای زیاد →
-    روشن شدن خودکار کولر
-</div>
-
-</section>
-
-
-<!-- 06 SMART WORLD -->
-<section class="slide" id="s5">
-
-<div class="center">
-
-    <div class="eyebrow">
-        05 / SMART WORLD
-    </div>
-
-    <h2 class="title">
-        دنیای <span>متصل</span>
-    </h2>
-
-    <p class="sub">
-        روی هر بخش کلیک کنید تا نمونه‌ای از کاربرد IoT را ببینید
-    </p>
-
-</div>
-
-<div class="iot-room">
-
-    <div class="floor"></div>
-
-    <div class="room-item i1"
-         onclick="showInfo(
-         'خانه هوشمند',
-         'لامپ‌ها، ترموستات، دوربین‌ها و لوازم خانگی می‌توانند به شبکه متصل شوند و از راه دور یا به‌صورت خودکار کنترل شوند.'
-         )">
-        🏠
-        <span>خانه هوشمند</span>
-    </div>
-
-    <div class="room-item i2"
-         onclick="showInfo(
-         'خودروی متصل',
-         'خودروهای متصل می‌توانند اطلاعاتی مانند موقعیت، وضعیت خودرو و داده‌های مربوط به رانندگی را با سامانه‌های دیگر تبادل کنند.'
-         )">
-        🚗
-        <span>خودروی متصل</span>
-    </div>
-
-    <div class="room-item i3"
-         onclick="showInfo(
-         'پزشکی هوشمند',
-         'دستگاه‌های پوشیدنی و تجهیزات پزشکی متصل می‌توانند برخی داده‌های بدن یا وضعیت بیمار را ثبت و منتقل کنند.'
-         )">
-        ❤️
-        <span>پزشکی</span>
-    </div>
-
-    <div class="room-item i4"
-         onclick="showInfo(
-         'کشاورزی هوشمند',
-         'حسگرهای خاک، رطوبت و دما به کشاورز کمک می‌کنند شرایط مزرعه را دقیق‌تر پایش کند.'
-         )">
-        🌱
-        <span>کشاورزی</span>
-    </div>
-
-    <div class="room-item i5"
-         onclick="showInfo(
-         'صنعت هوشمند',
-         'ماشین‌آلات و تجهیزات صنعتی می‌توانند داده‌های عملکردی تولید کنند و برای پایش و نگهداری مورد استفاده قرار گیرند.'
-         )">
-        🏭
-        <span>صنعت</span>
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- 07 APPLICATIONS -->
-<section class="slide" id="s6">
-
-<div class="center">
-
-    <div class="eyebrow">
-        06 / APPLICATIONS
-    </div>
-
-    <h2 class="title">
-        کاربردهای <span>اینترنت اشیا</span>
-    </h2>
-
-    <p class="sub">
-        IoT فقط به خانه هوشمند محدود نیست
-    </p>
-
-</div>
-
-<div class="cards">
-
-    <div class="card">
-        <div class="icon">🏠</div>
-        <h3>خانه هوشمند</h3>
-        <p>کنترل روشنایی، دما، امنیت و لوازم خانگی.</p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🏥</div>
-        <h3>سلامت</h3>
-        <p>پایش از راه دور برخی شاخص‌ها و تجهیزات متصل.</p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🏭</div>
-        <h3>صنعت</h3>
-        <p>پایش ماشین‌آلات و نگهداری پیش‌بینانه.</p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🌾</div>
-        <h3>کشاورزی</h3>
-        <p>اندازه‌گیری رطوبت خاک و مدیریت منابع.</p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🚦</div>
-        <h3>شهر هوشمند</h3>
-        <p>مدیریت ترافیک، پارکینگ و زیرساخت شهری.</p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🚚</div>
-        <h3>حمل‌ونقل</h3>
-        <p>ردیابی و مدیریت ناوگان و خودروهای متصل.</p>
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- 08 BENEFITS -->
-<section class="slide" id="s7">
-
-<div class="center">
-
-    <div class="eyebrow">
-        07 / BENEFITS & CHALLENGES
-    </div>
-
-    <h2 class="title">
-        مزایا و <span>چالش‌ها</span>
-    </h2>
-
-</div>
-
-<div class="cards">
-
-    <div class="card">
-        <div class="icon">⚡</div>
-        <h3>اتوماسیون</h3>
-        <p>
-            انجام خودکار بسیاری از کارها
-            بر اساس داده و شرایط محیط.
-        </p>
-    </div>
-
-    <div class="card">
-        <div class="icon">📊</div>
-        <h3>تصمیم‌گیری داده‌محور</h3>
-        <p>
-            استفاده از داده‌های واقعی
-            برای شناخت بهتر وضعیت سیستم.
-        </p>
-    </div>
-
-    <div class="card">
-        <div class="icon">💰</div>
-        <h3>بهینه‌سازی</h3>
-        <p>
-            کمک به کاهش مصرف منابع
-            و افزایش بهره‌وری در برخی کاربردها.
-        </p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🔐</div>
-        <h3>امنیت و حریم خصوصی</h3>
-        <p>
-            افزایش دستگاه‌های متصل،
-            نیاز به حفاظت بهتر از داده‌ها را بیشتر می‌کند.
-        </p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🌐</div>
-        <h3>وابستگی به شبکه</h3>
-        <p>
-            پایداری ارتباط و زیرساخت شبکه
-            برای بسیاری از کاربردها اهمیت دارد.
-        </p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🧩</div>
-        <h3>استانداردها</h3>
-        <p>
-            هماهنگی میان دستگاه‌ها و پروتکل‌های مختلف
-            یکی از مسائل مهم IoT است.
-        </p>
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- 09 FUTURE -->
-<section class="slide" id="s8">
-
-<div class="center">
-
-    <div class="eyebrow">
-        08 / FUTURE
-    </div>
-
-    <h2 class="title">
-        آینده <span>اینترنت اشیا</span>
-    </h2>
-
-    <p class="sub">
-        ترکیب IoT با فناوری‌های جدید می‌تواند
-        سیستم‌های متصل را هوشمندتر کند.
-    </p>
-
-</div>
-
-<div class="future">
-
-    <div class="card">
-        <div class="icon">🤖</div>
-        <h3>هوش مصنوعی</h3>
-        <p>
-            تحلیل حجم زیادی از داده‌های دستگاه‌ها
-            و استخراج الگوهای مفید.
-        </p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🏙️</div>
-        <h3>شهرهای هوشمند</h3>
-        <p>
-            اتصال زیرساخت‌های شهری
-            برای پایش و مدیریت بهتر.
-        </p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🚘</div>
-        <h3>حمل‌ونقل متصل</h3>
-        <p>
-            ارتباط میان خودروها،
-            جاده‌ها و سامانه‌های حمل‌ونقل.
-        </p>
-    </div>
-
-    <div class="card">
-        <div class="icon">🌐</div>
-        <h3>دنیای متصل‌تر</h3>
-        <p>
-            اتصال تعداد بیشتری از اشیای
-            روزمره به شبکه‌های ارتباطی.
-        </p>
-    </div>
-
-</div>
-
-<div class="stat-row">
-
-    <div class="stat">
-        <strong>IoT</strong>
-        <span>Internet of Things</span>
-    </div>
-
-    <div class="stat">
-        <strong>DATA</strong>
-        <span>قلب سیستم‌های متصل</span>
-    </div>
-
-    <div class="stat">
-        <strong>AI + IoT</strong>
-        <span>هوش مصنوعی + اینترنت اشیا</span>
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- 10 END -->
-<section class="slide" id="s9">
-
-<div class="hero center">
-
-    <div class="earth-wrap">
-        <div class="earth"></div>
-    </div>
-
-    <div class="eyebrow">
-        END OF PRESENTATION
-    </div>
-
-    <h2 class="title">
-        آینده، <span>متصل</span> است
-    </h2>
-
-    <p class="sub">
-        اینترنت اشیا پلی میان دنیای فیزیکی
-        و دنیای دیجیتال است؛
-        از یک سنسور ساده تا یک شهر هوشمند.
-    </p>
-
-    <div class="quote">
-        «وقتی اشیا بتوانند داده تولید کنند،
-        ارتباط برقرار کنند و واکنش نشان دهند،
-        محیط اطراف ما هوشمندتر می‌شود.»
-    </div>
-
-    <div class="student-info">
-
-        <div class="info-pill">
-            ارائه‌دهنده:
-            <strong>احسان نامی</strong>
-        </div>
-
-        <div class="info-pill">
-            استاد:
-            <strong>غفوری</strong>
-        </div>
-
-    </div>
-
-    <p style="color:#657886;font-size:12px;margin-top:25px">
-        پایان ارائه • اینترنت اشیا (IoT)
-    </p>
-
-</div>
-
-</section>
-
-
-<footer>
-
-    <div class="counter" id="counter">
-        01 / 10
-    </div>
-
-    <div class="nav">
-
-        <button onclick="prev()">
-            →
-        </button>
-
-        <button onclick="next()">
-            ←
-        </button>
-
-    </div>
-
-</footer>
-
-</div>
-
-
-<!-- MODAL -->
-<div id="info">
-
-    <button class="close" onclick="hideInfo()">
-        ×
-    </button>
-
-    <h3 id="infoTitle"></h3>
-
-    <p id="infoText"></p>
-
-</div>
-
-
+<div id="ly"><div class="lyi" id="lyi"></div><div id="lyl"></div></div><canvas id="bg"></canvas><div id="pg"></div>
+<div id="stage"><div id="cam"><div id="float"><div id="board">
+<div class="cs" id="bk"></div><div class="cs" id="fl"></div><div class="cs" id="ce"></div><div class="cs" id="lw"></div><div class="cs" id="rw"></div><div id="dr"></div>
+<svg class="tr" viewBox="0 0 1000 700"><path d="M390 495H520"/><path d="M570 430V380H470"/><path d="M240 540H300V500"/><path d="M620 480H850"/><path d="M560 290H620"/><path d="M130 200H380"/><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="2.4s" repeatCount="indefinite" path="M390 495H520"/></circle><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="2.8s" repeatCount="indefinite" path="M570 430V380H470"/></circle><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="2s" repeatCount="indefinite" path="M240 540H300V500"/></circle><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="3s" repeatCount="indefinite" path="M620 480H850"/></circle><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="1.6s" repeatCount="indefinite" path="M560 290H620"/></circle><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="3.2s" repeatCount="indefinite" path="M130 200H380"/></circle></svg>
+</div></div></div></div>
+<div id="card"></div>
+<button id="nb" onclick="tg()">📝 یادداشت (N)</button>
+<button id="mb" onclick="tm()" aria-label="صدا">🔊</button><div id="lz"></div>
+<div id="np"><div id="nt"></div></div>
+<div id="ps"></div>
 <script>
-
-const slides=[
-    ...document.querySelectorAll('.slide')
+var P=[['io',20,60,110,270,4,'','I/O'],['cpu',380,200,180,180,6,'CPU','CPU'],['ram',620,70,90,270,6,'','RAM'],['chip',300,470,90,50,14,'BIOS','BIOS / UEFI Flash'],['bat',160,500,80,80,10,'CR2032','باتری CMOS'],['pch',520,430,100,100,10,'PCH','چیپست'],['pcie',430,590,470,26,5,'','PCIe'],['pcie',430,640,470,26,5,'','PCIe'],['sata',850,400,90,90,6,'SATA','درگاه SATA / NVMe'],['pwr',870,60,90,50,8,'ATX','تغذیه'],['gpu',400,552,520,72,30,'','کارت گرافیک'],['ssd',250,395,120,26,4,'M.2','SSD'],['psu',40,760,340,140,20,'','منبع تغذیه'],['fan',390,195,180,180,60,'','فن CPU']];
+var B=document.getElementById('board'),els={};
+P.forEach(function(p){var d=document.createElement('div');d.className='p '+p[0];d.dataset.t=p[7];d.style.cssText='left:'+p[1]+'px;top:'+p[2]+'px;width:'+p[3]+'px;height:'+p[4]+'px;--z:'+p[5]+'px';d.innerHTML=({ram:'<i></i><i></i><i></i><i></i>',gpu:'<i class="gf"></i><i class="gf"></i><i class="gf"></i>',fan:'<i class="sp"></i>',psu:'<i class="gf"></i>PSU'})[p[0]]||p[6];d.onclick=function(){for(var q=0;q<S.length;q++)if(S[q].id==p[0]){go(q);return}};B.appendChild(d);(els[p[0]]=els[p[0]]||[]).push(d)});
+var S=[
+{id:'',x:500,y:430,s:.33,rx:10,ry:-30,rz:0,dc:1,k:'ارائه‌ی درس',h:'<span>BIOS</span><br>مغز راه‌انداز کامپیوتر',l:['<b>ارائه‌دهنده:</b> احسان نامی','<b>استاد:</b> هلیا کوشا','با کلیدهای ← → یا دکمه‌ها جلو برو']},
+{id:'',x:500,y:430,s:.35,rx:6,ry:-22,rz:0,h:'سیستم کامل کامپیوتر',l:['<b>مادربرد:</b> بستر اتصال همه‌ی قطعات','<b>CPU، RAM، GPU و SSD</b> روی مادربرد یا از طریق آن کار می‌کنند','<b>منبع تغذیه (PSU)</b> برق همه‌ی قطعات را تأمین می‌کند','<b>BIOS</b> اولین نرم‌افزاری است که این مجموعه را بیدار می‌کند']},
+{id:'',x:500,y:430,s:.35,rx:12,ry:24,rz:0,h:'فهرست مطالب',l:['<b>۱)</b> مادربرد و BIOS: تعریف و تاریخچه','<b>۲)</b> حافظه، POST، RAM و CMOS','<b>۳)</b> پیکربندی و راه‌اندازی دستگاه‌ها','<b>۴)</b> فرایند بوت','<b>۵)</b> UEFI، امنیت و به‌روزرسانی']},
+{id:'io',x:75,y:195,s:2.3,rx:35,rz:0,h:'مادربرد چیست؟',l:['برد اصلی که CPU، RAM، ذخیره‌ساز و درگاه‌ها را به هم وصل می‌کند','مسیرهای مسی (Trace) داده و برق را بین قطعات جابه‌جا می‌کنند','BIOS روی همین برد، قطعات را برای کار آماده می‌کند']},
+{id:'chip',x:345,y:495,s:2.6,rx:35,rz:0,h:'BIOS چیست؟',f:'اولین BIOS کامپیوتر IBM PC فقط ۸ کیلوبایت حجم داشت.',l:['<b>Basic Input/Output System</b>؛ فرم‌ور روی تراشه‌ی فلش مادربرد','اولین کدی که پس از روشن شدن اجرا می‌شود','واسط بین سخت‌افزار و سیستم‌عامل']},
+{id:'',x:500,y:430,s:.42,rx:10,ry:0,rz:0,dc:1,L:1,h:'مدل لایه‌ای سخت‌افزار و نرم‌افزار',l:['هر لایه فقط به لایه‌ی مجاور خودش تکیه می‌کند','<b>روشن شدن:</b> از پایین به بالا؛ سخت‌افزار ← BIOS ← بوت‌لودر ← سیستم‌عامل ← برنامه','<b>اجرای برنامه:</b> درخواست پایین می‌رود و پاسخ بالا برمی‌گردد']},
+{id:'chip',x:345,y:495,s:2.2,rx:38,rz:0,h:'تاریخچه‌ی BIOS',l:['واژه‌ی BIOS در سیستم‌عامل CP/M (سال ۱۹۷۵) به کار رفت','۱۹۸۱: IBM PC با BIOS داخل ROM؛ دهه‌ی ۸۰: شرکت‌های Phoenix، AMI و Award نسخه‌های سازگار ساختند','Intel در حدود ۲۰۰۰ برای Itanium نسخه‌ی EFI را ساخت؛ ۲۰۰۵: تأسیس UEFI Forum']},
+{id:'chip',x:345,y:495,s:3.2,rx:32,rz:0,h:'حافظه‌ی نگه‌دارنده‌ی BIOS',l:['تکامل: ROM ← EPROM ← EEPROM ← <b>Flash (SPI)</b>','حافظه‌ی فلش غیرفرار است و بدون برق هم کد را نگه می‌دارد','قابل بازنویسی است؛ پایه‌ی به‌روزرسانی BIOS']},
+{id:'cpu',x:470,y:290,s:3,rx:28,rz:0,h:'POST؛ خودآزمایی اولیه',t:'CPU ........ OK\nRAM ........ OK\nVGA ........ OK\nKBD ........ OK',l:['<b>Power-On Self-Test</b>: بررسی CPU، RAM، گرافیک و کیبورد','خطا؟ بوق‌های هشدار (Beep Code) یا کد خطای LED','شروع: CPU از آدرس ثابت (<b>Reset Vector</b>) کد BIOS را اجرا می‌کند']},
+{id:'ram',x:665,y:205,s:2.4,rx:30,rz:0,h:'بررسی و راه‌اندازی RAM',t:'SPD read ... DDR5\nTraining .... 100%\nMemory: 16384 MB OK',l:['BIOS مشخصات ماژول‌ها را از تراشه‌ی SPD می‌خواند','مرحله‌ی <b>Memory Training</b> سرعت و زمان‌بندی را تنظیم می‌کند','بدون RAM سالم، بوت ادامه پیدا نمی‌کند']},
+{id:'bat',x:200,y:540,s:2.8,rx:35,rz:0,h:'حافظه‌ی CMOS و باتری',f:'باتری CR2032 معمولاً چند سال دوام می‌آورد؛ اگر ساعت سیستم عقب افتاد، اول باتری را عوض کن.',l:['تنظیمات (ساعت، ترتیب بوت و ...) در <b>CMOS</b> ذخیره می‌شود','باتری <b>CR2032</b> (حدود ۳ ولت) آن را زنده نگه می‌دارد','باتری تمام شود: ساعت ریست و تنظیمات پیش‌فرض می‌شود']},
+{id:'pch',x:570,y:480,s:2.6,rx:32,rz:0,h:'چیپست و پیکربندی',l:['چیپست (PCH) پل ارتباطی CPU با دستگاه‌هاست','BIOS دستگاه‌ها را شناسایی و منابع (IRQ، آدرس) را تخصیص می‌دهد','برای Setup کلید <b>Del</b> یا <b>F2</b> را بزن']},
+{id:'pch',x:570,y:480,s:3.2,rx:28,rz:0,h:'صفحه‌ی BIOS Setup',l:['<b>Boot:</b> ترتیب بوت (SSD، USB، ...)','<b>Advanced:</b> مجازی‌سازی، اورکلاک، مدیریت انرژی','<b>Security:</b> رمز BIOS، Secure Boot','ذخیره و خروج با <b>F10</b>']},
+{id:'gpu',x:660,y:588,s:2.3,rx:32,rz:0,h:'Option ROM و کارت‌های جانبی',l:['کارت‌ها (مثل گرافیک) کد راه‌اندازی خودشان را دارند (Option ROM)','BIOS این کد را اجرا می‌کند تا تصویر روی نمایشگر بیاید','شبکه و کنترلر RAID هم می‌توانند Option ROM داشته باشند']},
+{id:'sata',x:895,y:445,s:2.5,rx:32,rz:0,h:'فرایند بوت',t:'Searching boot device...\nFound: NVMe SSD\nLoading bootloader...\nStarting OS',l:['۱. روشن شدن ← ۲. POST','۳. جست‌وجوی دستگاه بوت (SSD/HDD/USB)','۴. خواندن <b>بوت‌لودر</b>','۵. واگذاری کنترل به سیستم‌عامل']},
+{id:'sata',x:895,y:445,s:3.4,rx:28,rz:0,h:'MBR و GPT',f:'سقف ۲ ترابایت از اینجا می‌آید: MBR آدرس‌دهی ۳۲ بیتی برای سکتورهای ۵۱۲ بایتی دارد.',l:['<b>MBR:</b> ۵۱۲ بایت اول دیسک با امضای 55AA و پشتیبانی تا ۲ ترابایت','<b>GPT:</b> پارتیشن‌بندی مدرن برای دیسک‌های بزرگ‌تر','در UEFI بوت‌لودر داخل پارتیشن <b>ESP</b> (FAT32) قرار دارد']},
+{id:'chip',x:345,y:495,s:2.2,rx:35,rz:0,h:'BIOS در برابر UEFI',f:'UEFI می‌تواند برنامه اجرا کند و حتی محیط Shell خودش را دارد.',l:['<b>BIOS قدیمی:</b> ۱۶ بیتی، MBR، رابط متنی، بوت کندتر','<b>UEFI:</b> ۳۲/۶۴ بیتی، GPT، رابط گرافیکی با ماوس، بوت سریع‌تر','امروز تقریباً همه‌ی مادربردها UEFI هستند']},
+{id:'chip',x:345,y:495,s:2.8,rx:32,rz:0,h:'امنیت و Secure Boot',f:'ویروس CIH با نام Chernobyl هم معروف است و در ۲۶ آوریل فعال می‌شد.',l:['<b>Secure Boot</b> امضای بوت‌لودر را قبل از اجرا بررسی می‌کند','تهدید: Bootkit و روت‌کیت‌ها؛ ویروس CIH (۱۹۹۸) حتی BIOS را بازنویسی می‌کرد','رمز Setup و TPM لایه‌های حفاظتی دیگرند']},
+{id:'pwr',x:915,y:85,s:2.6,rx:32,rz:0,h:'به‌روزرسانی BIOS',t:'Flashing BIOS ... 87%\nDO NOT POWER OFF!',l:['برای رفع باگ، پشتیبانی CPU جدید و وصله‌ی امنیتی انجام می‌شود','<b>خطر:</b> قطع برق حین Flash می‌تواند برد را از کار بیندازد (Brick)','قبل از شروع برق پایدار را مطمئن شو؛ برخی بردها Dual BIOS دارند']},
+{id:'',x:500,y:430,s:.33,rx:10,ry:30,rz:0,dc:1,k:'جمع‌بندی',h:'از برق تا سیستم‌عامل',l:['BIOS/UEFI پلی است بین سخت‌افزار و نرم‌افزار','مراحل: Reset ← POST ← پیکربندی ← بوت','منابع: مستندات UEFI Forum، Intel و سازندگان مادربرد','<b>ممنون از توجه شما 🙏</b>']}
 ];
-
-let current=0;
-
-const progress=
-document.getElementById('progress');
-
-
-/* CREATE PROGRESS DOTS */
-
-slides.forEach((_,i)=>{
-
-    const d=
-    document.createElement('i');
-
-    d.className=
-    'dot'+
-    (i===0?' active':'');
-
-    d.onclick=()=>{
-        go(i);
-    };
-
-    progress.appendChild(d);
-
-});
-
-
-/* GO TO SLIDE */
-
-function go(n){
-
-    current=
-    Math.max(
-        0,
-        Math.min(
-            slides.length-1,
-            n
-        )
-    );
-
-    slides.forEach((s,i)=>{
-
-        s.classList.toggle(
-            'active',
-            i===current
-        );
-
-    });
-
-    [
-        ...progress.children
-    ].forEach((d,i)=>{
-
-        d.classList.toggle(
-            'active',
-            i===current
-        );
-
-    });
-
-    document
-    .getElementById('counter')
-    .textContent=
-    String(current+1)
-    .padStart(2,'0')
-    +' / '+
-    String(slides.length)
-    .padStart(2,'0');
-
+var N=[
+'سلام و وقت بخیر. من احسان نامی هستم و امروز درباره‌ی BIOS ارائه می‌دهم؛ همان چیزی که کامپیوتر را از یک سخت‌افزار بی‌جان به یک سیستم زنده تبدیل می‌کند. ممنون از خانم کوشا که این فرصت را دادند.',
+'قبل از اینکه سراغ BIOS برویم، کل سیستم را ببینیم. این کیس یک کامپیوتر کامل است: مادربرد قلب آن است و CPU، RAM، کارت گرافیک، SSD و منبع تغذیه به آن وصل هستند. BIOS هم روی همین مادربرد است و کارش این است که همه‌ی این قطعات را برای کار آماده کند.',
+'اول مادربرد و تعریف BIOS را می‌بینیم. بعد حافظه، POST، RAM و CMOS. بعد پیکربندی دستگاه‌ها، بعد فرایند بوت و در آخر UEFI، امنیت و به‌روزرسانی.',
+'مادربرد برد اصلی کامپیوتر است و CPU، RAM، ذخیره‌ساز و درگاه‌ها را به هم وصل می‌کند. مسیرهای مسی روی آن، داده و برق را جابه‌جا می‌کنند. اما قطعات به‌تنهایی نمی‌دانند چطور با هم کار کنند؛ اینجا BIOS وارد می‌شود.',
+'BIOS مخفف Basic Input/Output System است. یک فرم‌ور است که روی تراشه‌ی فلش مادربرد ذخیره شده. اولین کدی است که بعد از روشن شدن اجرا می‌شود و واسط بین سخت‌افزار و سیستم‌عامل است.',
+'کامپیوتر از چند لایه ساخته شده. پایین‌ترین لایه سخت‌افزار است. بالاتر از آن BIOS یا UEFI قرار دارد که سخت‌افزار را راه‌اندازی می‌کند. بعد بوت‌لودر، بعد سیستم‌عامل و در بالاترین لایه برنامه‌ها. هنگام روشن شدن لایه‌ها از پایین به بالا بیدار می‌شوند و هنگام اجرای یک برنامه، درخواست از بالا به پایین می‌رود و پاسخ برمی‌گردد.',
+'اصطلاح BIOS اولین بار در سیستم‌عامل CP/M در سال ۱۹۷۵ به کار رفت. در ۱۹۸۱ IBM PC با BIOS داخل ROM آمد و در دهه‌ی ۸۰ شرکت‌هایی مثل Phoenix، AMI و Award نسخه‌های سازگار ساختند. Intel حدود ۲۰۰۰ برای Itanium نسخه‌ی EFI را ساخت و در ۲۰۰۵ UEFI Forum تأسیس شد.',
+'حافظه‌ی BIOS تکامل پیدا کرد: ROM، بعد EPROM، بعد EEPROM و در نهایت Flash. فلش غیرفرار است و بدون برق هم کد را نگه می‌دارد. چون قابل بازنویسی است، به‌روزرسانی BIOS ممکن شده.',
+'POST یعنی Power-On Self-Test، خودآزمایی اولیه. CPU از یک آدرس ثابت به اسم Reset Vector شروع به اجرای کد BIOS می‌کند. BIOS کارکرد CPU، RAM، گرافیک و کیبورد را بررسی می‌کند و اگر مشکلی باشد با بوق‌های هشدار یا کد خطا خبر می‌دهد. الگوی بوق‌ها در AMI و Award فرق دارد.',
+'BIOS مشخصات ماژول‌های RAM را از تراشه‌ی SPD می‌خواند. بعد مرحله‌ی Memory Training سرعت و زمان‌بندی را تنظیم می‌کند. اگر RAM سالم نباشد، بوت ادامه پیدا نمی‌کند.',
+'تنظیمات مثل ساعت و ترتیب بوت در حافظه‌ی CMOS ذخیره می‌شوند. این حافظه با باتری CR2032 و حدود ۳ ولت زنده می‌ماند. اگر باتری تمام شود، ساعت ریست می‌شود و تنظیمات به پیش‌فرض برمی‌گردد.',
+'چیپست یا PCH پل ارتباطی CPU با بقیه‌ی دستگاه‌هاست. BIOS دستگاه‌ها را شناسایی می‌کند و منابعی مثل IRQ و آدرس را به آن‌ها می‌دهد. برای ورود به تنظیمات باید کلید Del یا F2 را بزنیم.',
+'در Setup چند بخش اصلی داریم. در Boot ترتیب بوت را می‌گذاریم. در Advanced مجازی‌سازی، اورکلاک و مدیریت انرژی را تنظیم می‌کنیم. در Security رمز BIOS و Secure Boot را می‌بینیم و با F10 ذخیره می‌کنیم و خارج می‌شویم.',
+'کارت‌های جانبی مثل گرافیک، کد راه‌اندازی خودشان را دارند که به آن Option ROM می‌گویند. BIOS این کد را اجرا می‌کند تا مثلاً تصویر روی نمایشگر بیاید. کارت شبکه و کنترلر RAID هم می‌توانند Option ROM داشته باشند.',
+'ترتیب را مرور کنیم: روشن شدن، بعد POST، بعد BIOS دنبال دستگاه بوت می‌گردد؛ SSD، هارد یا USB. بعد بوت‌لودر را می‌خواند و در نهایت کنترل را به سیستم‌عامل می‌دهد.',
+'در سیستم قدیمی، ۵۱۲ بایت اول دیسک به نام MBR با امضای 55AA برای بوت استفاده می‌شد و تا ۲ ترابایت پشتیبانی داشت. GPT پارتیشن‌بندی مدرن برای دیسک‌های بزرگ‌تر است. در UEFI بوت‌لودر داخل پارتیشن ESP با فرمت FAT32 قرار دارد.',
+'BIOS قدیمی ۱۶ بیتی است، از MBR استفاده می‌کند، رابط متنی دارد و کندتر بوت می‌شود. UEFI ۳۲ یا ۶۴ بیتی است، GPT را پشتیبانی می‌کند، رابط گرافیکی با ماوس دارد و سریع‌تر بوت می‌شود. امروز تقریباً همه‌ی مادربردها UEFI هستند.',
+'Secure Boot امضای بوت‌لودر را قبل از اجرا بررسی می‌کند. تهدیدهایی مثل Bootkit و روت‌کیت وجود دارند و ویروس CIH در سال ۱۹۹۸ حتی می‌توانست BIOS را بازنویسی کند. رمز Setup و TPM لایه‌های حفاظتی دیگرند.',
+'به‌روزرسانی برای رفع باگ، پشتیبانی از CPU جدید و وصله‌ی امنیتی انجام می‌شود. خطرش این است که اگر برق حین Flash قطع شود، برد ممکن است از کار بیفتد که به آن Brick می‌گویند. پس قبل از شروع، پایداری برق را چک کنیم. بعضی بردها Dual BIOS دارند که این خطر را کم می‌کند.',
+'BIOS یا UEFI پلی بین سخت‌افزار و نرم‌افزار است. مسیر کار: Reset، بعد POST، بعد پیکربندی و بعد بوت. منابع من مستندات UEFI Forum، Intel و سازندگان مادربرد بود. ممنون از توجه شما؛ اگر سؤالی هست در خدمتم.'
+];
+var nt=document.getElementById('nt');
+function tg(){document.body.classList.toggle('sn')}
+var AC,started=false,mute=false;
+function au(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state=='suspended')AC.resume();return AC}
+function tone(f,d,ty,v,w){if(mute)return;var a=au();if(!a)return;var o=a.createOscillator(),g=a.createGain(),t=a.currentTime+(w||0);o.type=ty||'sine';o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v||.08,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d+.05)}
+function beep(){tone(1000,.25,'square',.05)}
+function tick(){tone(1700+Math.random()*500,.03,'square',.015)}
+function ping(){tone(880,.4,'sine',.05);tone(1320,.5,'sine',.03,.09)}
+function whoosh(){if(mute)return;var a=au();if(!a)return;var n=Math.floor(a.sampleRate*.7),b=a.createBuffer(1,n,a.sampleRate),d=b.getChannelData(0);for(var k=0;k<n;k++)d[k]=(Math.random()*2-1)*(1-k/n);var s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain(),t=a.currentTime;s.buffer=b;f.type='bandpass';f.Q.value=1.2;f.frequency.setValueAtTime(250,t);f.frequency.exponentialRampToValueAtTime(2600,t+.6);g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.09,t+.2);g.gain.exponentialRampToValueAtTime(.0001,t+.7);s.connect(f);f.connect(g);g.connect(a.destination);s.start(t)}
+function tm(){mute=!mute;document.getElementById('mb').textContent=mute?'🔇':'🔊'}
+var i=0,card=document.getElementById('card');
+function go(n,sil){
+ i=Math.max(0,Math.min(S.length-1,n));var s=S[i],m=innerWidth<800,b=Math.min(innerWidth/1000,innerHeight/700)*(m?1:.95);
+ var z=s.s*b*(m&&s.s>1.5?1.35:1);
+ B.style.transform='scale('+z+') rotateX('+s.rx+'deg) rotateY('+(s.ry||0)+'deg) rotateZ('+s.rz+'deg) translate('+(500-s.x)+'px,'+(350-s.y)+'px)';
+ var dr=document.getElementById('dr');clearTimeout(window.dt);if(s.dc){dr.style.display='block';void dr.offsetWidth}else window.dt=setTimeout(function(){dr.style.display='none'},1900);B.className=(s.id?'focus focus-'+s.id:'')+(s.dc?'':' op')+(s.s>1.2?' zm':'');document.getElementById('cam').style.opacity=s.L?.08:1;document.getElementById('ly').classList.toggle('show',!!s.L);
+ for(var k in els)els[k].forEach(function(e){e.classList.toggle('on',k==s.id)});
+ var dots='';for(var j=0;j<S.length;j++)dots+='<i class="'+(j==i?'a':'')+'" onclick="go('+j+')"></i>';
+ card.innerHTML=(s.k?'<div class="k">'+s.k+'</div>':'<div class="k">'+(i+1)+' / '+S.length+'</div>')+'<h2>'+s.h+'</h2><ul>'+s.l.map(function(t,d){return '<li style="--d:'+d+'">'+t+'</li>'}).join('')+'</ul>'+(s.f?'<div class="fact">💡 '+s.f+'</div>':'')+(s.t?'<pre class="term">'+s.t.split('\n').map(function(x,d){return '<span style="--d:'+(d+3)+'">'+x+'</span>'}).join('')+'</pre>':'')+'<div id="nav"><button onclick="go(i-1)" aria-label="قبلی">›</button><div id="dots">'+dots+'</div><button onclick="go(i+1)" aria-label="بعدی">‹</button></div>';
+ nt.textContent=N[i];document.getElementById('pg').style.width=((i+1)/S.length*100)+'%';if(started&&!sil){whoosh();if(s.id)setTimeout(ping,1500)}
 }
-
-
-/* NEXT / PREVIOUS */
-
-function next(){
-    go(current+1);
-}
-
-function prev(){
-    go(current-1);
-}
-
-
-/* KEYBOARD */
-
-document.addEventListener(
-    'keydown',
-    e=>{
-
-        if(
-            e.key==='ArrowLeft' ||
-            e.key==='PageDown' ||
-            e.key===' '
-        ){
-
-            e.preventDefault();
-            next();
-
-        }
-
-        if(
-            e.key==='ArrowRight' ||
-            e.key==='PageUp'
-        ){
-
-            e.preventDefault();
-            prev();
-
-        }
-
-        if(
-            e.key==='Escape'
-        ){
-
-            hideInfo();
-
-        }
-
-    }
-);
-
-
-/* INFO MODAL */
-
-function showInfo(title,text){
-
-    document
-    .getElementById('infoTitle')
-    .textContent=title;
-
-    document
-    .getElementById('infoText')
-    .textContent=text;
-
-    document
-    .getElementById('info')
-    .classList.add('show');
-
-}
-
-
-function hideInfo(){
-
-    document
-    .getElementById('info')
-    .classList.remove('show');
-
-}
-
-
-/* PARTICLES */
-
-const p=
-document.getElementById('particles');
-
-for(
-    let i=0;
-    i<80;
-    i++
-){
-
-    const x=
-    document.createElement('i');
-
-    const size=
-    Math.random()*2.5+1;
-
-    x.style.cssText=
-    `
-    position:absolute;
-    width:${size}px;
-    height:${size}px;
-    border-radius:50%;
-    background:#00e5ff;
-    opacity:${Math.random()*.55+.1};
-    left:${Math.random()*100}%;
-    top:${Math.random()*100}%;
-    box-shadow:0 0 9px #00e5ff;
-    animation:
-    floatParticle
-    ${Math.random()*8+5}s
-    ease-in-out
-    ${Math.random()*-8}s
-    infinite alternate;
-    `;
-
-    p.appendChild(x);
-
-}
-
-
-/* PARTICLE ANIMATION */
-
-const st=
-document.createElement('style');
-
-st.textContent=
-`
-@keyframes floatParticle{
-
-    to{
-
-        transform:
-        translate3d(
-            ${(Math.random()*100)-50}px,
-            ${(Math.random()*100)-50}px,
-            0
-        );
-
-        opacity:.05;
-
-    }
-
-}
-`;
-
-document.head.appendChild(st);
-
-
-/* TOUCH SWIPE */
-
-let touchStartX=0;
-
-document.addEventListener(
-    'touchstart',
-    e=>{
-
-        touchStartX=
-        e.changedTouches[0].screenX;
-
-    }
-);
-
-document.addEventListener(
-    'touchend',
-    e=>{
-
-        const touchEndX=
-        e.changedTouches[0].screenX;
-
-        const diff=
-        touchStartX-touchEndX;
-
-        if(
-            Math.abs(diff)>60
-        ){
-
-            if(diff>0)
-                next();
-            else
-                prev();
-
-        }
-
-    }
-);
-
+addEventListener('keydown',function(e){if(!ps.classList.contains('h')){ps.onclick();return}if(e.key=='m'||e.key=='M')tm();if(e.key=='f'||e.key=='F'){try{document.documentElement.requestFullscreen()}catch(x){}}if(e.key=='ArrowLeft'||e.key==' ')go(i+1);if(e.key=='ArrowRight')go(i-1);if(e.key=='n'||e.key=='N')tg()});
+var x0;addEventListener('touchstart',function(e){x0=e.touches[0].clientX});
+addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(d<0?i+1:i-1)});
+addEventListener('resize',function(){go(i,1)});
+var ps=document.getElementById('ps'),L=['BIOS Presentation v1.0  -  Ehsan Nami','Presented to: Prof. Helia Kousha','','Testing CPU .............. OK','Testing Memory ........... 16384 MB OK','Detecting devices ........ OK','Loading presentation ...','','[ Press any key to start ]'],ptx='',pi=0,pt,booted=false;
+ps.innerHTML='<div id="pw"><b>&#9211;</b><span>برای روشن کردن کامپیوتر کلیک کن</span></div>';
+function hidePs(){clearTimeout(pt);beep();ps.classList.add('h');started=true;go(i)}
+function ty(){if(pi>=L.length){pt=setTimeout(hidePs,1300);return}ptx+=L[pi++]+'\n';ps.textContent=ptx;tick();pt=setTimeout(ty,pi<4?380:520)}
+ps.onclick=function(){if(!booted){booted=true;au();tone(90,.6,'sawtooth',.04);ptx='';ps.textContent='';setTimeout(ty,500)}else hidePs()};
+var cv=document.getElementById('bg'),cx=cv.getContext('2d'),ST=[];function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener('resize',rs);
+for(var q=0;q<70;q++)ST.push({x:Math.random(),y:Math.random(),r:Math.random()*1.6+.3,v:Math.random()*.00006+.00002,p:Math.random()*6});
+(function dr(t){cx.clearRect(0,0,cv.width,cv.height);ST.forEach(function(s){s.y=(s.y-s.v*16+1)%1;cx.globalAlpha=.25+.35*Math.sin(t/900+s.p);cx.fillStyle='#38e1c6';cx.beginPath();cx.arc(s.x*cv.width,s.y*cv.height,s.r,0,6.3);cx.fill()});requestAnimationFrame(dr)})(0);
+addEventListener('mousemove',function(e){var lz=document.getElementById('lz');lz.style.opacity=1;lz.style.left=e.clientX+'px';lz.style.top=e.clientY+'px';var st=document.getElementById('stage');st.style.setProperty('--ry',((e.clientX/innerWidth-.5)*10)+'deg');st.style.setProperty('--rx2',((.5-e.clientY/innerHeight)*6)+'deg')});
+var LN=['برنامه‌ها','سیستم‌عامل','بوت‌لودر','BIOS / UEFI (فرم‌ور)','سخت‌افزار'],LC=['#7c8cff','#a78bfa','#f59e0b','#38e1c6','#94a3b8'];
+document.getElementById('lyi').innerHTML=LN.map(function(t,k){return '<div class="sl" style="--c:'+LC[k]+';--z:'+(4-k)*78+'px">'+t+'</div>'}).join('');
+var lt=0;setInterval(function(){var y=document.getElementById('ly');if(!y.classList.contains('show'))return;var e=document.querySelectorAll('#ly .sl'),k=lt<5?4-lt:lt-5;e.forEach(function(x,q){x.classList.toggle('on',q==k)});document.getElementById('lyl').textContent=lt<5?'روشن شدن: از پایین به بالا ↑':'اجرای برنامه: از بالا به پایین ↓';if(started)tone(300+(4-k)*110,.15,'triangle',.05);lt=(lt+1)%10},1000);
+go(0);
 </script>
-
 </body>
 </html>
