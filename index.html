@@ -12,7 +12,7 @@
 html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
 body{height:100%;margin:0;overflow:hidden;color:var(--tx);font-family:Vazirmatn,Tahoma,sans-serif;background:radial-gradient(ellipse at 30% 20%,color-mix(in srgb,var(--ac2) 22%,transparent),transparent 55%),radial-gradient(ellipse at 80% 90%,color-mix(in srgb,var(--ac) 16%,transparent),transparent 50%),var(--bg)}
 #stage{position:absolute;inset:0;perspective:1500px;--sx:-15vw;--sy:0vh}
-#cam{position:absolute;left:50%;top:50%;transform:translate(var(--sx),var(--sy));transform-style:preserve-3d;transition:transform 1.2s ease}
+#cam{position:absolute;left:50%;top:50%;transform:translate(var(--sx),var(--sy)) rotateY(var(--ry,0deg)) rotateX(var(--rx2,0deg));transform-style:preserve-3d;transition:transform 1.2s ease}
 #float{transform-style:preserve-3d;animation:fl 6s ease-in-out infinite}
 @keyframes fl{50%{transform:translateY(-8px)}}
 #board{position:absolute;left:-500px;top:-350px;width:1000px;height:700px;border-radius:16px;transform-style:preserve-3d;transition:transform 1.8s cubic-bezier(.65,0,.2,1);
@@ -60,37 +60,57 @@ svg.tr{position:absolute;inset:0;width:100%;height:100%}
 #np{display:none;position:fixed;left:2vw;bottom:2vh;width:min(560px,50vw);max-height:38vh;overflow:auto;background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--ac);border-radius:18px;padding:16px 20px;z-index:8;line-height:2.1;font-size:clamp(15px,1.5vw,19px)}
 .sn #np{display:block}
 @media (max-width:800px){#np{left:12px;right:12px;width:auto;top:calc(56px + env(safe-area-inset-top,0px));bottom:auto;max-height:34vh}}
+#bg{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#pg{position:fixed;top:0;right:0;height:3px;width:0;background:linear-gradient(270deg,var(--ac),var(--ac2));transition:width .9s;z-index:9}
+.p{cursor:pointer}.p:hover{filter:brightness(1.4)}
+.term{direction:ltr;text-align:left;margin:12px 0 0;padding:12px 14px;background:#02060d;color:#4ade80;border-radius:12px;font:13px/1.7 'Courier New',monospace;border:1px solid #1f3b2e}
+.term span{display:block;opacity:0;animation:in .4s forwards;animation-delay:calc(.9s + var(--d)*.45s)}
+#ps{position:fixed;inset:0;z-index:20;background:#000;color:#9cf0b8;font:clamp(13px,2vw,19px)/1.8 'Courier New',monospace;padding:8vh 6vw;direction:ltr;text-align:left;white-space:pre-wrap;transition:opacity 1s;cursor:pointer}
+#ps.h{opacity:0;pointer-events:none}
+#pw{height:100%;display:grid;place-content:center;text-align:center;gap:18px}
+#pw b{font-size:clamp(60px,12vw,120px);color:#4ade80;text-shadow:0 0 30px #4ade80;animation:pl 1.6s ease-in-out infinite;font-weight:400}
+#pw span{font:18px Vazirmatn,Tahoma,sans-serif;direction:rtl;color:#9cf0b8}
+@keyframes pl{50%{opacity:.4}}
+@keyframes rp{0%{outline:2px solid var(--ac);outline-offset:0}100%{outline:2px solid transparent;outline-offset:26px}}
+.focus .p.on{animation:pu 2s ease-in-out infinite,rp 2s ease-out infinite}
+.fact{margin-top:12px;padding:10px 14px;border-radius:12px;background:color-mix(in srgb,var(--ac2) 20%,transparent);font-size:clamp(13px,1.1vw,15px);line-height:1.9;opacity:0;animation:in .7s 2.4s forwards}
+#mb{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:150px;z-index:9;border:1px solid var(--ac);background:var(--card);color:var(--ac);border-radius:99px;padding:6px 12px;font-size:14px;cursor:pointer}
+#lz{position:fixed;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--ac) 70%,transparent),transparent 70%);pointer-events:none;z-index:15;transform:translate(-50%,-50%);opacity:0;transition:opacity .4s}
+@media (min-width:801px){#card{max-height:88vh;overflow:auto}}
 </style>
 </head>
 <body>
+<canvas id="bg"></canvas><div id="pg"></div>
 <div id="stage"><div id="cam"><div id="float"><div id="board">
-<svg class="tr" viewBox="0 0 1000 700"><path d="M390 495H520"/><path d="M570 430V380H470"/><path d="M240 540H300V500"/><path d="M620 480H850"/><path d="M560 290H620"/><path d="M130 200H380"/></svg>
+<svg class="tr" viewBox="0 0 1000 700"><path d="M390 495H520"/><path d="M570 430V380H470"/><path d="M240 540H300V500"/><path d="M620 480H850"/><path d="M560 290H620"/><path d="M130 200H380"/><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="2.4s" repeatCount="indefinite" path="M390 495H520"/></circle><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="2.8s" repeatCount="indefinite" path="M570 430V380H470"/></circle><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="2s" repeatCount="indefinite" path="M240 540H300V500"/></circle><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="3s" repeatCount="indefinite" path="M620 480H850"/></circle><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="1.6s" repeatCount="indefinite" path="M560 290H620"/></circle><circle r="5" fill="#fff" opacity=".9"><animateMotion dur="3.2s" repeatCount="indefinite" path="M130 200H380"/></circle></svg>
 </div></div></div></div>
 <div id="card"></div>
 <button id="nb" onclick="tg()">📝 یادداشت (N)</button>
+<button id="mb" onclick="tm()" aria-label="صدا">🔊</button><div id="lz"></div>
 <div id="np"><div id="nt"></div></div>
+<div id="ps"></div>
 <script>
 var P=[['io',20,60,110,270,4,'','I/O'],['cpu',380,200,180,180,6,'CPU','CPU'],['ram',620,70,90,270,6,'','RAM'],['chip',300,470,90,50,14,'BIOS','BIOS / UEFI Flash'],['bat',160,500,80,80,10,'CR2032','باتری CMOS'],['pch',520,430,100,100,10,'PCH','چیپست'],['pcie',430,590,470,26,5,'','PCIe'],['pcie',430,640,470,26,5,'','PCIe'],['sata',850,400,90,90,6,'SATA','درگاه SATA / NVMe'],['pwr',870,60,90,50,8,'ATX','تغذیه']];
 var B=document.getElementById('board'),els={};
-P.forEach(function(p){var d=document.createElement('div');d.className='p '+p[0];d.dataset.t=p[7];d.style.cssText='left:'+p[1]+'px;top:'+p[2]+'px;width:'+p[3]+'px;height:'+p[4]+'px;--z:'+p[5]+'px';d.innerHTML=p[0]=='ram'?'<i></i><i></i><i></i><i></i>':p[6];B.appendChild(d);(els[p[0]]=els[p[0]]||[]).push(d)});
+P.forEach(function(p){var d=document.createElement('div');d.className='p '+p[0];d.dataset.t=p[7];d.style.cssText='left:'+p[1]+'px;top:'+p[2]+'px;width:'+p[3]+'px;height:'+p[4]+'px;--z:'+p[5]+'px';d.innerHTML=p[0]=='ram'?'<i></i><i></i><i></i><i></i>':p[6];d.onclick=function(){for(var q=0;q<S.length;q++)if(S[q].id==p[0]){go(q);return}};B.appendChild(d);(els[p[0]]=els[p[0]]||[]).push(d)});
 var S=[
 {id:'',x:500,y:350,s:.95,rx:55,rz:-28,k:'ارائه‌ی درس',h:'<span>BIOS</span><br>مغز راه‌انداز کامپیوتر',l:['<b>ارائه‌دهنده:</b> احسان نامی','<b>استاد:</b> هلیا کوشا','با کلیدهای ← → یا دکمه‌ها جلو برو']},
 {id:'',x:500,y:350,s:.9,rx:50,rz:22,h:'فهرست مطالب',l:['<b>۱)</b> مادربرد و BIOS: تعریف و تاریخچه','<b>۲)</b> حافظه، POST، RAM و CMOS','<b>۳)</b> پیکربندی و راه‌اندازی دستگاه‌ها','<b>۴)</b> فرایند بوت','<b>۵)</b> UEFI، امنیت و به‌روزرسانی']},
 {id:'io',x:75,y:195,s:2.3,rx:35,rz:0,h:'مادربرد چیست؟',l:['برد اصلی که CPU، RAM، ذخیره‌ساز و درگاه‌ها را به هم وصل می‌کند','مسیرهای مسی (Trace) داده و برق را بین قطعات جابه‌جا می‌کنند','BIOS روی همین برد، قطعات را برای کار آماده می‌کند']},
-{id:'chip',x:345,y:495,s:2.6,rx:35,rz:0,h:'BIOS چیست؟',l:['<b>Basic Input/Output System</b>؛ فرم‌ور روی تراشه‌ی فلش مادربرد','اولین کدی که پس از روشن شدن اجرا می‌شود','واسط بین سخت‌افزار و سیستم‌عامل']},
+{id:'chip',x:345,y:495,s:2.6,rx:35,rz:0,h:'BIOS چیست؟',f:'اولین BIOS کامپیوتر IBM PC فقط ۸ کیلوبایت حجم داشت.',l:['<b>Basic Input/Output System</b>؛ فرم‌ور روی تراشه‌ی فلش مادربرد','اولین کدی که پس از روشن شدن اجرا می‌شود','واسط بین سخت‌افزار و سیستم‌عامل']},
 {id:'chip',x:345,y:495,s:2.2,rx:38,rz:0,h:'تاریخچه‌ی BIOS',l:['واژه‌ی BIOS در سیستم‌عامل CP/M (سال ۱۹۷۵) به کار رفت','۱۹۸۱: IBM PC با BIOS داخل ROM؛ دهه‌ی ۸۰: شرکت‌های Phoenix، AMI و Award نسخه‌های سازگار ساختند','Intel در حدود ۲۰۰۰ برای Itanium نسخه‌ی EFI را ساخت؛ ۲۰۰۵: تأسیس UEFI Forum']},
 {id:'chip',x:345,y:495,s:3.2,rx:32,rz:0,h:'حافظه‌ی نگه‌دارنده‌ی BIOS',l:['تکامل: ROM ← EPROM ← EEPROM ← <b>Flash (SPI)</b>','حافظه‌ی فلش غیرفرار است و بدون برق هم کد را نگه می‌دارد','قابل بازنویسی است؛ پایه‌ی به‌روزرسانی BIOS']},
-{id:'cpu',x:470,y:290,s:3,rx:28,rz:0,h:'POST؛ خودآزمایی اولیه',l:['<b>Power-On Self-Test</b>: بررسی CPU، RAM، گرافیک و کیبورد','خطا؟ بوق‌های هشدار (Beep Code) یا کد خطای LED','شروع: CPU از آدرس ثابت (<b>Reset Vector</b>) کد BIOS را اجرا می‌کند']},
-{id:'ram',x:665,y:205,s:2.4,rx:30,rz:0,h:'بررسی و راه‌اندازی RAM',l:['BIOS مشخصات ماژول‌ها را از تراشه‌ی SPD می‌خواند','مرحله‌ی <b>Memory Training</b> سرعت و زمان‌بندی را تنظیم می‌کند','بدون RAM سالم، بوت ادامه پیدا نمی‌کند']},
-{id:'bat',x:200,y:540,s:2.8,rx:35,rz:0,h:'حافظه‌ی CMOS و باتری',l:['تنظیمات (ساعت، ترتیب بوت و ...) در <b>CMOS</b> ذخیره می‌شود','باتری <b>CR2032</b> (حدود ۳ ولت) آن را زنده نگه می‌دارد','باتری تمام شود: ساعت ریست و تنظیمات پیش‌فرض می‌شود']},
+{id:'cpu',x:470,y:290,s:3,rx:28,rz:0,h:'POST؛ خودآزمایی اولیه',t:'CPU ........ OK\nRAM ........ OK\nVGA ........ OK\nKBD ........ OK',l:['<b>Power-On Self-Test</b>: بررسی CPU، RAM، گرافیک و کیبورد','خطا؟ بوق‌های هشدار (Beep Code) یا کد خطای LED','شروع: CPU از آدرس ثابت (<b>Reset Vector</b>) کد BIOS را اجرا می‌کند']},
+{id:'ram',x:665,y:205,s:2.4,rx:30,rz:0,h:'بررسی و راه‌اندازی RAM',t:'SPD read ... DDR5\nTraining .... 100%\nMemory: 16384 MB OK',l:['BIOS مشخصات ماژول‌ها را از تراشه‌ی SPD می‌خواند','مرحله‌ی <b>Memory Training</b> سرعت و زمان‌بندی را تنظیم می‌کند','بدون RAM سالم، بوت ادامه پیدا نمی‌کند']},
+{id:'bat',x:200,y:540,s:2.8,rx:35,rz:0,h:'حافظه‌ی CMOS و باتری',f:'باتری CR2032 معمولاً چند سال دوام می‌آورد؛ اگر ساعت سیستم عقب افتاد، اول باتری را عوض کن.',l:['تنظیمات (ساعت، ترتیب بوت و ...) در <b>CMOS</b> ذخیره می‌شود','باتری <b>CR2032</b> (حدود ۳ ولت) آن را زنده نگه می‌دارد','باتری تمام شود: ساعت ریست و تنظیمات پیش‌فرض می‌شود']},
 {id:'pch',x:570,y:480,s:2.6,rx:32,rz:0,h:'چیپست و پیکربندی',l:['چیپست (PCH) پل ارتباطی CPU با دستگاه‌هاست','BIOS دستگاه‌ها را شناسایی و منابع (IRQ، آدرس) را تخصیص می‌دهد','برای Setup کلید <b>Del</b> یا <b>F2</b> را بزن']},
 {id:'pch',x:570,y:480,s:3.2,rx:28,rz:0,h:'صفحه‌ی BIOS Setup',l:['<b>Boot:</b> ترتیب بوت (SSD، USB، ...)','<b>Advanced:</b> مجازی‌سازی، اورکلاک، مدیریت انرژی','<b>Security:</b> رمز BIOS، Secure Boot','ذخیره و خروج با <b>F10</b>']},
 {id:'pcie',x:665,y:603,s:2.6,rx:32,rz:0,h:'Option ROM و کارت‌های جانبی',l:['کارت‌ها (مثل گرافیک) کد راه‌اندازی خودشان را دارند (Option ROM)','BIOS این کد را اجرا می‌کند تا تصویر روی نمایشگر بیاید','شبکه و کنترلر RAID هم می‌توانند Option ROM داشته باشند']},
-{id:'sata',x:895,y:445,s:2.5,rx:32,rz:0,h:'فرایند بوت',l:['۱. روشن شدن ← ۲. POST','۳. جست‌وجوی دستگاه بوت (SSD/HDD/USB)','۴. خواندن <b>بوت‌لودر</b>','۵. واگذاری کنترل به سیستم‌عامل']},
-{id:'sata',x:895,y:445,s:3.4,rx:28,rz:0,h:'MBR و GPT',l:['<b>MBR:</b> ۵۱۲ بایت اول دیسک با امضای 55AA و پشتیبانی تا ۲ ترابایت','<b>GPT:</b> پارتیشن‌بندی مدرن برای دیسک‌های بزرگ‌تر','در UEFI بوت‌لودر داخل پارتیشن <b>ESP</b> (FAT32) قرار دارد']},
-{id:'chip',x:345,y:495,s:2.2,rx:35,rz:0,h:'BIOS در برابر UEFI',l:['<b>BIOS قدیمی:</b> ۱۶ بیتی، MBR، رابط متنی، بوت کندتر','<b>UEFI:</b> ۳۲/۶۴ بیتی، GPT، رابط گرافیکی با ماوس، بوت سریع‌تر','امروز تقریباً همه‌ی مادربردها UEFI هستند']},
-{id:'chip',x:345,y:495,s:2.8,rx:32,rz:0,h:'امنیت و Secure Boot',l:['<b>Secure Boot</b> امضای بوت‌لودر را قبل از اجرا بررسی می‌کند','تهدید: Bootkit و روت‌کیت‌ها؛ ویروس CIH (۱۹۹۸) حتی BIOS را بازنویسی می‌کرد','رمز Setup و TPM لایه‌های حفاظتی دیگرند']},
-{id:'pwr',x:915,y:85,s:2.6,rx:32,rz:0,h:'به‌روزرسانی BIOS',l:['برای رفع باگ، پشتیبانی CPU جدید و وصله‌ی امنیتی انجام می‌شود','<b>خطر:</b> قطع برق حین Flash می‌تواند برد را از کار بیندازد (Brick)','قبل از شروع برق پایدار را مطمئن شو؛ برخی بردها Dual BIOS دارند']},
+{id:'sata',x:895,y:445,s:2.5,rx:32,rz:0,h:'فرایند بوت',t:'Searching boot device...\nFound: NVMe SSD\nLoading bootloader...\nStarting OS',l:['۱. روشن شدن ← ۲. POST','۳. جست‌وجوی دستگاه بوت (SSD/HDD/USB)','۴. خواندن <b>بوت‌لودر</b>','۵. واگذاری کنترل به سیستم‌عامل']},
+{id:'sata',x:895,y:445,s:3.4,rx:28,rz:0,h:'MBR و GPT',f:'سقف ۲ ترابایت از اینجا می‌آید: MBR آدرس‌دهی ۳۲ بیتی برای سکتورهای ۵۱۲ بایتی دارد.',l:['<b>MBR:</b> ۵۱۲ بایت اول دیسک با امضای 55AA و پشتیبانی تا ۲ ترابایت','<b>GPT:</b> پارتیشن‌بندی مدرن برای دیسک‌های بزرگ‌تر','در UEFI بوت‌لودر داخل پارتیشن <b>ESP</b> (FAT32) قرار دارد']},
+{id:'chip',x:345,y:495,s:2.2,rx:35,rz:0,h:'BIOS در برابر UEFI',f:'UEFI می‌تواند برنامه اجرا کند و حتی محیط Shell خودش را دارد.',l:['<b>BIOS قدیمی:</b> ۱۶ بیتی، MBR، رابط متنی، بوت کندتر','<b>UEFI:</b> ۳۲/۶۴ بیتی، GPT، رابط گرافیکی با ماوس، بوت سریع‌تر','امروز تقریباً همه‌ی مادربردها UEFI هستند']},
+{id:'chip',x:345,y:495,s:2.8,rx:32,rz:0,h:'امنیت و Secure Boot',f:'ویروس CIH با نام Chernobyl هم معروف است و در ۲۶ آوریل فعال می‌شد.',l:['<b>Secure Boot</b> امضای بوت‌لودر را قبل از اجرا بررسی می‌کند','تهدید: Bootkit و روت‌کیت‌ها؛ ویروس CIH (۱۹۹۸) حتی BIOS را بازنویسی می‌کرد','رمز Setup و TPM لایه‌های حفاظتی دیگرند']},
+{id:'pwr',x:915,y:85,s:2.6,rx:32,rz:0,h:'به‌روزرسانی BIOS',t:'Flashing BIOS ... 87%\nDO NOT POWER OFF!',l:['برای رفع باگ، پشتیبانی CPU جدید و وصله‌ی امنیتی انجام می‌شود','<b>خطر:</b> قطع برق حین Flash می‌تواند برد را از کار بیندازد (Brick)','قبل از شروع برق پایدار را مطمئن شو؛ برخی بردها Dual BIOS دارند']},
 {id:'',x:500,y:350,s:.95,rx:55,rz:28,k:'جمع‌بندی',h:'از برق تا سیستم‌عامل',l:['BIOS/UEFI پلی است بین سخت‌افزار و نرم‌افزار','مراحل: Reset ← POST ← پیکربندی ← بوت','منابع: مستندات UEFI Forum، Intel و سازندگان مادربرد','<b>ممنون از توجه شما 🙏</b>']}
 ];
 var N=[
@@ -115,21 +135,38 @@ var N=[
 ];
 var nt=document.getElementById('nt');
 function tg(){document.body.classList.toggle('sn')}
+var AC,started=false,mute=false;
+function au(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state=='suspended')AC.resume();return AC}
+function tone(f,d,ty,v,w){if(mute)return;var a=au();if(!a)return;var o=a.createOscillator(),g=a.createGain(),t=a.currentTime+(w||0);o.type=ty||'sine';o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v||.08,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d+.05)}
+function beep(){tone(1000,.25,'square',.05)}
+function tick(){tone(1700+Math.random()*500,.03,'square',.015)}
+function ping(){tone(880,.4,'sine',.05);tone(1320,.5,'sine',.03,.09)}
+function whoosh(){if(mute)return;var a=au();if(!a)return;var n=Math.floor(a.sampleRate*.7),b=a.createBuffer(1,n,a.sampleRate),d=b.getChannelData(0);for(var k=0;k<n;k++)d[k]=(Math.random()*2-1)*(1-k/n);var s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain(),t=a.currentTime;s.buffer=b;f.type='bandpass';f.Q.value=1.2;f.frequency.setValueAtTime(250,t);f.frequency.exponentialRampToValueAtTime(2600,t+.6);g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.09,t+.2);g.gain.exponentialRampToValueAtTime(.0001,t+.7);s.connect(f);f.connect(g);g.connect(a.destination);s.start(t)}
+function tm(){mute=!mute;document.getElementById('mb').textContent=mute?'🔇':'🔊'}
 var i=0,card=document.getElementById('card');
-function go(n){
+function go(n,sil){
  i=Math.max(0,Math.min(S.length-1,n));var s=S[i],m=innerWidth<800,b=Math.min(innerWidth/1000,innerHeight/700)*(m?1:.95);
  var z=s.s*b*(m&&s.s>1.5?1.35:1);
  B.style.transform='scale('+z+') rotateX('+s.rx+'deg) rotateZ('+s.rz+'deg) translate('+(500-s.x)+'px,'+(350-s.y)+'px)';
  B.className=s.id?'focus':'';
  for(var k in els)els[k].forEach(function(e){e.classList.toggle('on',k==s.id)});
  var dots='';for(var j=0;j<S.length;j++)dots+='<i class="'+(j==i?'a':'')+'" onclick="go('+j+')"></i>';
- card.innerHTML=(s.k?'<div class="k">'+s.k+'</div>':'<div class="k">'+(i+1)+' / '+S.length+'</div>')+'<h2>'+s.h+'</h2><ul>'+s.l.map(function(t,d){return '<li style="--d:'+d+'">'+t+'</li>'}).join('')+'</ul><div id="nav"><button onclick="go(i-1)" aria-label="قبلی">›</button><div id="dots">'+dots+'</div><button onclick="go(i+1)" aria-label="بعدی">‹</button></div>';
- nt.textContent=N[i];
+ card.innerHTML=(s.k?'<div class="k">'+s.k+'</div>':'<div class="k">'+(i+1)+' / '+S.length+'</div>')+'<h2>'+s.h+'</h2><ul>'+s.l.map(function(t,d){return '<li style="--d:'+d+'">'+t+'</li>'}).join('')+'</ul>'+(s.f?'<div class="fact">💡 '+s.f+'</div>':'')+(s.t?'<pre class="term">'+s.t.split('\n').map(function(x,d){return '<span style="--d:'+(d+3)+'">'+x+'</span>'}).join('')+'</pre>':'')+'<div id="nav"><button onclick="go(i-1)" aria-label="قبلی">›</button><div id="dots">'+dots+'</div><button onclick="go(i+1)" aria-label="بعدی">‹</button></div>';
+ nt.textContent=N[i];document.getElementById('pg').style.width=((i+1)/S.length*100)+'%';if(started&&!sil){whoosh();if(s.id)setTimeout(ping,1500)}
 }
-addEventListener('keydown',function(e){if(e.key=='ArrowLeft'||e.key==' ')go(i+1);if(e.key=='ArrowRight')go(i-1);if(e.key=='n'||e.key=='N')tg()});
+addEventListener('keydown',function(e){if(!ps.classList.contains('h')){ps.onclick();return}if(e.key=='m'||e.key=='M')tm();if(e.key=='f'||e.key=='F'){try{document.documentElement.requestFullscreen()}catch(x){}}if(e.key=='ArrowLeft'||e.key==' ')go(i+1);if(e.key=='ArrowRight')go(i-1);if(e.key=='n'||e.key=='N')tg()});
 var x0;addEventListener('touchstart',function(e){x0=e.touches[0].clientX});
 addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(d<0?i+1:i-1)});
-addEventListener('resize',function(){go(i)});
+addEventListener('resize',function(){go(i,1)});
+var ps=document.getElementById('ps'),L=['BIOS Presentation v1.0  -  Ehsan Nami','Presented to: Prof. Helia Kousha','','Testing CPU .............. OK','Testing Memory ........... 16384 MB OK','Detecting devices ........ OK','Loading presentation ...','','[ Press any key to start ]'],ptx='',pi=0,pt,booted=false;
+ps.innerHTML='<div id="pw"><b>&#9211;</b><span>برای روشن کردن کامپیوتر کلیک کن</span></div>';
+function hidePs(){clearTimeout(pt);beep();ps.classList.add('h');started=true;go(i)}
+function ty(){if(pi>=L.length){pt=setTimeout(hidePs,1300);return}ptx+=L[pi++]+'\n';ps.textContent=ptx;tick();pt=setTimeout(ty,pi<4?380:520)}
+ps.onclick=function(){if(!booted){booted=true;au();tone(90,.6,'sawtooth',.04);ptx='';ps.textContent='';setTimeout(ty,500)}else hidePs()};
+var cv=document.getElementById('bg'),cx=cv.getContext('2d'),ST=[];function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener('resize',rs);
+for(var q=0;q<70;q++)ST.push({x:Math.random(),y:Math.random(),r:Math.random()*1.6+.3,v:Math.random()*.00006+.00002,p:Math.random()*6});
+(function dr(t){cx.clearRect(0,0,cv.width,cv.height);ST.forEach(function(s){s.y=(s.y-s.v*16+1)%1;cx.globalAlpha=.25+.35*Math.sin(t/900+s.p);cx.fillStyle='#38e1c6';cx.beginPath();cx.arc(s.x*cv.width,s.y*cv.height,s.r,0,6.3);cx.fill()});requestAnimationFrame(dr)})(0);
+addEventListener('mousemove',function(e){var lz=document.getElementById('lz');lz.style.opacity=1;lz.style.left=e.clientX+'px';lz.style.top=e.clientY+'px';var st=document.getElementById('stage');st.style.setProperty('--ry',((e.clientX/innerWidth-.5)*10)+'deg');st.style.setProperty('--rx2',((.5-e.clientY/innerHeight)*6)+'deg')});
 go(0);
 </script>
 </body>
