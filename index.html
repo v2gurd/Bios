@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BIOS؛ مغز راه‌انداز کامپیوتر</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b14;--card:rgba(14,20,36,.8);--tx:#e8eefc;--mut:#93a1c4;--ac:#38e1c6;--ac2:#7c8cff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#e9eefb;--card:rgba(255,255,255,.88);--tx:#0e1526;--mut:#4d5c7d;--ac:#079a84;--ac2:#4453d8}}
+:root[data-theme="dark"]{--bg:#070b14}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{height:100%;margin:0;overflow:hidden;color:var(--tx);font-family:Vazirmatn,Tahoma,sans-serif;background:radial-gradient(ellipse at 30% 20%,color-mix(in srgb,var(--ac2) 22%,transparent),transparent 55%),radial-gradient(ellipse at 80% 90%,color-mix(in srgb,var(--ac) 16%,transparent),transparent 50%),var(--bg)}
+#stage{position:absolute;inset:0;perspective:1500px;--sx:-15vw;--sy:0vh}
+#cam{position:absolute;left:50%;top:50%;transform:translate(var(--sx),var(--sy));transform-style:preserve-3d;transition:transform 1.2s ease}
+#float{transform-style:preserve-3d;animation:fl 6s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px)}}
+#board{position:absolute;left:-500px;top:-350px;width:1000px;height:700px;border-radius:16px;transform-style:preserve-3d;transition:transform 1.8s cubic-bezier(.65,0,.2,1);
+background:linear-gradient(rgba(56,225,198,.07) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(56,225,198,.07) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(135deg,#0f4a45,#0b2f45);
+box-shadow:0 2px 0 #08303a,0 4px 0 #072a33,0 6px 0 #06242c,0 8px 0 #051e25,0 40px 60px rgba(0,0,0,.55)}
+svg.tr{position:absolute;inset:0;width:100%;height:100%}
+.tr path{fill:none;stroke:var(--ac);stroke-width:3;stroke-dasharray:8 14;opacity:.55;animation:fw 2s linear infinite}
+@keyframes fw{to{stroke-dashoffset:-44}}
+.p{position:absolute;border-radius:6px;transform:translateZ(var(--z));--e:#0a111f;background:#1a2438;box-shadow:1px 1px 0 var(--e),2px 2px 0 var(--e),3px 3px 0 var(--e),4px 4px 0 var(--e),6px 8px 10px rgba(0,0,0,.55);transition:opacity .8s,box-shadow .8s;display:flex;align-items:center;justify-content:center;font:700 13px monospace;color:#cfd8ea}
+.p::before{content:attr(data-t);position:absolute;top:-30px;left:50%;transform:translateX(-50%);white-space:nowrap;font:700 17px Vazirmatn,sans-serif;background:var(--ac);color:#04111a;padding:2px 12px;border-radius:99px;opacity:0;transition:opacity .6s .8s}
+.focus .p{opacity:.35}
+.focus .p.on{opacity:1;animation:pu 2s ease-in-out infinite}
+.p.on::before{opacity:1}
+@keyframes pu{50%{box-shadow:1px 1px 0 var(--e),2px 2px 0 var(--e),3px 3px 0 var(--e),4px 4px 0 var(--e),0 0 40px 8px var(--ac)}}
+.io{background:repeating-linear-gradient(90deg,#8b97ad 0 14px,#6d7890 14px 16px)}
+.cpu{background:linear-gradient(#2a3552,#2a3552) center/60% 60% no-repeat,repeating-linear-gradient(0deg,#c9a24a 0 3px,#3a2f12 3px 6px);border:6px solid #2b3550}
+.cpu{font-size:22px}
+.ram{background:#0d1526;flex-direction:row;gap:10px;padding:8px}
+.ram i{flex:1;height:100%;background:linear-gradient(#20304f,#0b1120);border-radius:3px;border:1px solid #38e1c644}
+.chip{background:#0a0d14;border:2px solid #c9a24a;font-size:20px;color:#fff;letter-spacing:2px}
+.chip::after{content:"";position:absolute;left:6px;top:6px;width:7px;height:7px;border-radius:50%;background:#c9a24a}
+.bat{border-radius:50%;background:radial-gradient(circle,#dfe6f2,#8894aa);color:#233;font-size:14px}
+.pch{background:repeating-linear-gradient(90deg,#3b4a6b 0 8px,#222c45 8px 12px);color:#fff}
+.pcie{background:#0b0f19;border:2px solid #232d47}
+.sata{background:#0b0f19;border:2px solid #38e1c655;border-radius:4px}
+.pwr{background:#e8e8ee;color:#333}
+#card{position:fixed;top:50%;right:4vw;width:min(440px,36vw);transform:translateY(-50%);background:var(--card);backdrop-filter:blur(14px);border:1px solid color-mix(in srgb,var(--ac) 30%,transparent);border-radius:22px;padding:26px 28px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+#card .k{color:var(--ac);font:700 13px monospace;letter-spacing:2px}
+#card h2{margin:6px 0 14px;font-size:clamp(24px,3.2vw,38px);font-weight:900;line-height:1.35}
+#card h2 span{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+#card ul{list-style:none;margin:0;padding:0}
+#card li{position:relative;padding:0 22px 0 0;margin:0 0 10px;color:var(--mut);line-height:1.9;font-size:clamp(14px,1.25vw,17px);opacity:0;transform:translateY(14px);animation:in .7s forwards;animation-delay:calc(.9s + var(--d)*.28s)}
+#card li::before{content:"";position:absolute;right:0;top:.85em;width:9px;height:9px;border-radius:3px;background:var(--ac);transform:rotate(45deg)}
+#card li b{color:var(--tx)}
+#card .k,#card h2{animation:in .8s both}
+@keyframes in{to{opacity:1;transform:none}}
+#nav{display:flex;align-items:center;gap:10px;margin-top:18px}
+#nav button{width:42px;height:42px;border-radius:50%;border:1px solid var(--ac);background:transparent;color:var(--ac);font-size:20px;cursor:pointer;transition:.25s}
+#nav button:hover{background:var(--ac);color:#04111a;transform:scale(1.1)}
+#dots{flex:1;display:flex;gap:6px;justify-content:center}
+#dots i{width:8px;height:8px;border-radius:99px;background:var(--mut);opacity:.4;transition:.4s;cursor:pointer}
+#dots i.a{width:26px;background:var(--ac);opacity:1}
+@media (max-width:800px){#stage{--sx:0vw;--sy:-17vh}#card{top:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px));right:12px;left:12px;width:auto;transform:none;padding:16px 18px;max-height:46vh;overflow:auto}#card li{margin-bottom:5px}}
+</style>
+</head>
+<body>
+<div id="stage"><div id="cam"><div id="float"><div id="board">
+<svg class="tr" viewBox="0 0 1000 700"><path d="M390 495H520"/><path d="M570 430V380H470"/><path d="M240 540H300V500"/><path d="M620 480H850"/><path d="M560 290H620"/><path d="M130 200H380"/></svg>
+</div></div></div></div>
+<div id="card"></div>
+<script>
+var P=[['io',20,60,110,270,4,'','I/O'],['cpu',380,200,180,180,6,'CPU','CPU'],['ram',620,70,90,270,6,'','RAM'],['chip',300,470,90,50,14,'BIOS','BIOS / UEFI Flash'],['bat',160,500,80,80,10,'CR2032','باتری CMOS'],['pch',520,430,100,100,10,'PCH','چیپست'],['pcie',430,590,470,26,5,'','PCIe'],['pcie',430,640,470,26,5,'','PCIe'],['sata',850,400,90,90,6,'SATA','درگاه SATA / NVMe'],['pwr',870,60,90,50,8,'ATX','تغذیه']];
+var B=document.getElementById('board'),els={};
+P.forEach(function(p){var d=document.createElement('div');d.className='p '+p[0];d.dataset.t=p[7];d.style.cssText='left:'+p[1]+'px;top:'+p[2]+'px;width:'+p[3]+'px;height:'+p[4]+'px;--z:'+p[5]+'px';d.innerHTML=p[0]=='ram'?'<i></i><i></i><i></i><i></i>':p[6];B.appendChild(d);(els[p[0]]=els[p[0]]||[]).push(d)});
+var S=[
+{id:'',x:500,y:350,s:.95,rx:55,rz:-28,k:'ارائه دانشگاهی',h:'<span>BIOS</span><br>مغز راه‌انداز کامپیوتر',l:['از لحظه‌ی فشردن دکمه‌ی روشن تا ورود به ویندوز، چه اتفاقی می‌افتد؟','با کلیدهای ← → یا دکمه‌ها جلو برو']},
+{id:'chip',x:345,y:495,s:2.6,rx:35,rz:0,h:'BIOS چیست؟',l:['<b>Basic Input/Output System</b>؛ یک فرم‌ور (Firmware) روی تراشه‌ی فلش مادربرد','اولین کدی که پس از روشن شدن اجرا می‌شود','واسط بین سخت‌افزار و سیستم‌عامل']},
+{id:'cpu',x:470,y:290,s:2.3,rx:30,rz:0,h:'POST؛ خودآزمایی اولیه',l:['CPU از یک آدرس ثابت (Reset Vector) شروع به اجرای کد BIOS می‌کند','<b>Power-On Self-Test</b>: بررسی CPU، RAM، گرافیک و کیبورد','خطا؟ بوق‌های هشدار (Beep Code) یا کد خطا']},
+{id:'bat',x:200,y:540,s:2.8,rx:35,rz:0,h:'حافظه‌ی CMOS و باتری',l:['تنظیمات (ساعت، ترتیب بوت و ...) در <b>CMOS</b> ذخیره می‌شود','باتری <b>CR2032</b> (حدود ۳ ولت) آن را زنده نگه می‌دارد','باتری تمام شود: ریست ساعت و تنظیمات پیش‌فرض']},
+{id:'pch',x:570,y:480,s:2.6,rx:32,rz:0,h:'چیپست و پیکربندی',l:['چیپست (PCH) پل ارتباطی CPU با دستگاه‌هاست','BIOS دستگاه‌ها را شناسایی و منابع (IRQ، آدرس) را تخصیص می‌دهد','ورود به Setup با <b>Del</b> یا <b>F2</b>: ترتیب بوت، مجازی‌سازی، اورکلاک']},
+{id:'sata',x:895,y:445,s:2.5,rx:32,rz:0,h:'فرایند بوت',l:['۱. روشن شدن ← ۲. POST','۳. جست‌وجوی دستگاه بوت (SSD/HDD/USB)','۴. خواندن <b>بوت‌لودر</b> (مثلاً MBR)','۵. واگذاری کنترل به سیستم‌عامل']},
+{id:'chip',x:345,y:495,s:2.2,rx:35,rz:0,h:'BIOS در برابر UEFI',l:['<b>BIOS قدیمی:</b> ۱۶ بیتی، MBR (تا ۲TB)، رابط متنی، بوت کندتر','<b>UEFI:</b> ۳۲/۶۴ بیتی، GPT (بیش از ۲TB)، Secure Boot، رابط گرافیکی با ماوس، بوت سریع‌تر','امروز تقریباً همه‌ی مادربردها UEFI هستند']}
+];
+var i=0,card=document.getElementById('card');
+function go(n){
+ i=Math.max(0,Math.min(S.length-1,n));var s=S[i],m=innerWidth<800,b=Math.min(innerWidth/1000,innerHeight/700)*(m?1:.95);
+ var z=s.s*b*(m&&s.s>1.5?1.35:1);
+ B.style.transform='scale('+z+') rotateX('+s.rx+'deg) rotateZ('+s.rz+'deg) translate('+(500-s.x)+'px,'+(350-s.y)+'px)';
+ B.className=s.id?'focus':'';
+ for(var k in els)els[k].forEach(function(e){e.classList.toggle('on',k==s.id)});
+ var dots='';for(var j=0;j<S.length;j++)dots+='<i class="'+(j==i?'a':'')+'" onclick="go('+j+')"></i>';
+ card.innerHTML=(s.k?'<div class="k">'+s.k+'</div>':'<div class="k">'+(i+1)+' / '+S.length+'</div>')+'<h2>'+s.h+'</h2><ul>'+s.l.map(function(t,d){return '<li style="--d:'+d+'">'+t+'</li>'}).join('')+'</ul><div id="nav"><button onclick="go(i-1)" aria-label="قبلی">›</button><div id="dots">'+dots+'</div><button onclick="go(i+1)" aria-label="بعدی">‹</button></div>';
+}
+addEventListener('keydown',function(e){if(e.key=='ArrowLeft'||e.key==' ')go(i+1);if(e.key=='ArrowRight')go(i-1)});
+var x0;addEventListener('touchstart',function(e){x0=e.touches[0].clientX});
+addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(d<0?i+1:i-1)});
+addEventListener('resize',function(){go(i)});
+go(0);
+</script>
+</body>
+</html>
